@@ -16,9 +16,12 @@ import { AdditemComponent } from './Forms/additem/additem.component';
 import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
 import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 import { SidenavComponent } from './Components/Common/sidenav/sidenav.component';
+import { LocationsComponent } from './Components/locations/locations.component';
+import { ItemsComponent } from './Components/items/items.component';
+import { VariantsComponent } from './Components/variants/variants.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent, SidenavComponent],
+  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent, SidenavComponent, LocationsComponent, ItemsComponent, VariantsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
