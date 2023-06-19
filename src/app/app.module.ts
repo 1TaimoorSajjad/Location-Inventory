@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { FeedComponent } from './Components/feed/feed.component';
-import { AdditemComponent } from './Modals/additem/additem.component';
 import { FormsModule } from '@angular/forms';
 import { ReversePipe } from './Pipes/reverse.pipe';
+import { AdditemComponent } from './Forms/additem/additem.component';
+import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
+import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, FeedComponent, AdditemComponent, ReversePipe],
+  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

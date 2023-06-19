@@ -6,6 +6,7 @@
     >
       Post an Update</button
     ><button
+      (click)="addItem()"
       class="bg-indigo-600 px-4 py-2 text-white font-semibold rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
     >
       Add Item
@@ -111,5 +112,3 @@
     </div>
   </div>
 </div>
-
-<app-additem *ngIf="isModalOpen" (addItemEvent)="addItem($event)"></app-additem>

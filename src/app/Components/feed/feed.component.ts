@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
+  constructor(private router: Router) {}
   isModalOpen: boolean = false;
 
   variants: string[] = ['Variant 1', 'Variant 2', 'Variant 3'];
@@ -37,8 +39,6 @@ export class FeedComponent implements OnInit {
 
   searchVariant() {}
 
-  constructor() {}
-
   ngOnInit(): void {}
 
   openModal() {
@@ -49,8 +49,9 @@ export class FeedComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  addItem(itemName: string) {
-    console.log('Adding item:', itemName);
-    this.closeModal();
+  addItem() {
+    console.log('button clicked');
+
+    this.router.navigate(['/additem']);
   }
 }
