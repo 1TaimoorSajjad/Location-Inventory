@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Components/login/login.component';
 import { FeedComponent } from './Components/feed/feed.component';
 import { AdditemComponent } from './Forms/additem/additem.component';
+import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'additem',
     component: AdditemComponent,
+  },
+  {
+    path: 'addlocation',
+    component: AddlocationComponent,
   },
 ];
 

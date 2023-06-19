@@ -15,9 +15,10 @@ import { ReversePipe } from './Pipes/reverse.pipe';
 import { AdditemComponent } from './Forms/additem/additem.component';
 import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
 import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
+import { SidenavComponent } from './Components/Common/sidenav/sidenav.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent],
+  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent, SidenavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

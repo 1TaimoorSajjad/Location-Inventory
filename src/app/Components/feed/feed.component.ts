@@ -54,4 +54,9 @@ export class FeedComponent implements OnInit {
 
     this.router.navigate(['/additem']);
   }
+  addLocation() {
+    console.log('button clicked');
+
+    this.router.navigate(['/addlocation']);
+  }
 }
