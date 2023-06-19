@@ -1,41 +1,24 @@
-<!--
-  This example requires some changes to your config:
-  
-  
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  
--->
-<!--
-  This example requires updating your template:
-
-  
-  <html class="h-full bg-white">
-  <body class="h-full">
-  
--->
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<div
+  class="flex min-h-screen bg-blue-300 flex-col justify-center items-center px-6 py-12 lg:px-8 pr-5"
+>
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img
-      class="mx-auto h-10 w-auto"
-      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+      class="mx-auto h-10 w-auto pr-5"
+      src="../../../assets/images/logo.png"
       alt="Your Company"
     />
     <h2
-      class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+      class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
     >
       Sign in to your account
     </h2>
   </div>
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" (submit)="login()">
+  <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form
+      class="space-y-6 shadow-lg rounded-md p-6 bg-gray-300"
+      (submit)="login()"
+    >
       <div>
         <label
           for="email"
@@ -44,13 +27,13 @@
         >
         <div class="mt-2">
           <input
+            [(ngModel)]="email"
             id="email"
             name="email"
             type="email"
-            [(ngModel)]="email"
             autocomplete="email"
             required
-            class="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
@@ -64,7 +47,7 @@
           >
           <div class="text-sm">
             <a
-              href="#"
+              routerLink="/register"
               class="font-semibold text-indigo-600 hover:text-indigo-500"
               >Forgot password?</a
             >
@@ -78,7 +61,7 @@
             type="password"
             autocomplete="current-password"
             required
-            class="block w-full rounded-md border-0 pl-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            class="block w-full rounded-md border-0 pl-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
       </div>

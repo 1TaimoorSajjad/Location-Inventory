@@ -12,9 +12,10 @@ import { LoginComponent } from './Components/login/login.component';
 import { FeedComponent } from './Components/feed/feed.component';
 import { AdditemComponent } from './Modals/additem/additem.component';
 import { FormsModule } from '@angular/forms';
+import { ReversePipe } from './Pipes/reverse.pipe';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, FeedComponent, AdditemComponent],
+  declarations: [AppComponent, LoginComponent, FeedComponent, AdditemComponent, ReversePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
