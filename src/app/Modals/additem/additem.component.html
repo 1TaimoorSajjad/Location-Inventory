@@ -1,1 +1,8 @@
-<p>additem works!</p>
+<div class="modal">
+  <h2>Add Item</h2>
+  <form (ngSubmit)="addItem()">
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" [(ngModel)]="itemName" required />
+    <button type="submit">Add</button>
+  </form>
+</div>

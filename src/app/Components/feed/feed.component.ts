@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
+  isModalOpen: boolean = false;
+
   variants: string[] = ['Variant 1', 'Variant 2', 'Variant 3'];
 
   locations: string[] = ['Location 1', 'Location 2', 'Location 3'];
@@ -38,4 +40,17 @@ export class FeedComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  addItem(itemName: string) {
+    console.log('Adding item:', itemName);
+    this.closeModal();
+  }
 }
