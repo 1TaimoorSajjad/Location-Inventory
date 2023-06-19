@@ -1,1 +1,122 @@
-<p>sidenav works!</p>
+<div
+  class="hidden h-full w-28 overflow-y-auto bg-indigo-900 lg:block border-r border-gray-200"
+>
+  <div class="flex w-full flex-col items-center py-6">
+    <div class="flex flex-shrink-0 items-center">
+      <img
+        class="h-8 w-auto"
+        src="https://nemtpanel.com/assets/images/nemt-logo-panel.png"
+        alt="Your Company"
+      />
+    </div>
+    <div class="mt-6 w-full flex-1 space-y-1 px-2">
+      <a
+        routerLink="/Trip/List"
+        [routerLinkActive]="['bg-indigo-800', '']"
+        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      >
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+        >
+          <path
+            d="M9.5 8h10.6a5 5 0 1 0 0-2H9.5a5.5 5.5 0 0 0 0 11h11a3.5 3.5 0 0 1 0 7h-8.6a5 5 0 1 0 0 2h8.6a5.5 5.5 0 0 0 0-11h-11a3.5 3.5 0 0 1 0-7zM25 4a3 3 0 1 1-3 3a3 3 0 0 1 3-3zM7 28a3 3 0 1 1 3-3a3 3 0 0 1-3 3z"
+            fill="currentColor"
+          />
+        </svg>
+        <span class="mt-2">Locations</span>
+      </a>
+      <div class="">
+        <a
+          routerLink="/Trip/Create"
+          [routerLinkActive]="['bg-indigo-800', '']"
+          class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+        >
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 15 15"
+          >
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M7 7V1h1v6h6v1H8v6H7V8H1V7h6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="mt-2"> Items</span>
+        </a>
+      </div>
+    </div>
+    <div class="mt-auto w-full flex-1 space-y-1 px-2">
+      <a
+        routerLink="/users"
+        [routerLinkActive]="['bg-indigo-800', '']"
+        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+          />
+        </svg>
+
+        <span class="mt-2">Variants</span>
+      </a>
+    </div>
+    <div class="mt-auto w-full flex-1 space-y-1 px-2">
+      <button
+        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+          />
+        </svg>
+        <span class="mt-2">Logout</span>
+      </button>
+    </div>
+    <div class="mt-auto w-full flex-1 space-y-1 px-2">
+      <button
+        routerLink="/profile"
+        [routerLinkActive]="['bg-indigo-800', '']"
+        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+          />
+        </svg>
+
+        username
+      </button>
+    </div>
+  </div>
+</div>
