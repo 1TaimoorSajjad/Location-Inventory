@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import {
   browserSessionPersistence,
@@ -14,7 +15,9 @@ import {
   styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent implements OnInit {
-  constructor(private router: Router) {}
+  loggedInUser: any;
+
+  constructor(private router: Router, private firestore: Firestore) {}
 
   ngOnInit(): void {}
 
