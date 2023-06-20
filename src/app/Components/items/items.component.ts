@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  query,
+  getDocs,
+  where,
+  doc,
+  getDoc,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,45 +17,54 @@ import { Router } from '@angular/router';
 })
 export class ItemsComponent implements OnInit {
   items: any[] = [];
-  variants: any[] = [];
-  collectionRef;
-  variantsCollectionRef;
-  constructor(private router: Router, private firestore: Firestore) {
-    this.collectionRef = collection(this.firestore, 'items');
-    this.variantsCollectionRef = collection(this.firestore, 'variants');
-  }
+
+  constructor(private router: Router, private firestore: Firestore) {}
 
   ngOnInit(): void {
     this.fetchItems();
-    this.fetchVariants();
   }
 
-  fetchItems() {
-    const q = query(this.collectionRef);
-    getDocs(q)
-      .then((querySnapshot) => {
-        this.items = [];
-        querySnapshot.forEach((doc) => {
-          this.items.push(doc.data());
-        });
-      })
-      .catch((error: any) => {
-        console.log('Error fetching items', error);
-      });
+  async fetchItems() {
+    const itemsRef = collection(this.firestore, 'items');
+    const q = query(itemsRef);
+
+    const querySnapshot = await getDocs(q);
+
+    this.items = [];
+    for (const doc of querySnapshot.docs) {
+      const itemData = doc.data();
+      const itemId = doc.id;
+      const variants = await this.fetchVariantsForItem(itemId);
+      const locations = await this.fetchLocationsForItem(itemData.location);
+      const itemWithVariants = { id: itemId, ...itemData, variants, locations };
+      this.items.push(itemWithVariants);
+    }
   }
 
-  fetchVariants() {
-    const q = query(this.variantsCollectionRef);
-    getDocs(q)
-      .then((querySnapshot) => {
-        this.variants = [];
-        querySnapshot.forEach((doc) => {
-          this.variants.push(doc.data());
-        });
-      })
-      .catch((error: any) => {
-        console.log('Error fetching variants', error);
-      });
+  async fetchVariantsForItem(itemId: string): Promise<any[]> {
+    const variantsRef = collection(this.firestore, 'variants');
+    const q = query(variantsRef, where('item', '==', itemId));
+
+    const querySnapshot = await getDocs(q);
+
+    const variants: any[] = [];
+    querySnapshot.forEach((doc) => {
+      variants.push(doc.data());
+    });
+
+    return variants;
+  }
+
+  async fetchLocationsForItem(locationId: string): Promise<any[]> {
+    const locationDocRef = doc(this.firestore, 'locations', locationId);
+    const locationDoc = await getDoc(locationDocRef);
+
+    if (locationDoc.exists()) {
+      const locationData = locationDoc.data();
+      return [locationData];
+    }
+
+    return [];
   }
 
   addItem() {

@@ -1,5 +1,7 @@
 <div class="flex h-screen overflow-hidden">
-  <app-sidenav></app-sidenav>
+  <app-sidenav
+    [ngClass]="{ hidden: isLoginPage() || isEmptyURL() }"
+  ></app-sidenav>
   <div class="flex flex-1 flex-col overflow-y-auto">
     <router-outlet></router-outlet>
   </div>

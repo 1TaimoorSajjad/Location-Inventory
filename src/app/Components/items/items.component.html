@@ -7,9 +7,9 @@
       <button
         type="button"
         (click)="addItem()"
-        class="block rounded-md bg-indigo-600 px-3 mt-2 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="block rounded-md bg-indigo-600 px-3 py-2 mt-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        Add Items
+        Add Item
       </button>
     </div>
   </div>
@@ -29,12 +29,21 @@
                 scope="col"
                 class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
+                Location
+              </th>
+              <th
+                scope="col"
+                class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
                 Variants
+              </th>
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                <span class="sr-only">Edit</span>
               </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let item of items | reverse">
+            <tr *ngFor="let item of items">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
@@ -42,7 +51,14 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  <li *ngFor="let variant of variants | reverse">
+                  <li *ngFor="let location of item.locations">
+                    {{ location.locationName }}
+                  </li>
+                </ul>
+              </td>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <ul>
+                  <li *ngFor="let variant of item.variants">
                     {{ variant.variantName }}
                   </li>
                 </ul>
@@ -51,12 +67,10 @@
                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-0"
               >
                 <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                  >Edit<span class="sr-only"></span
-                ></a>
+                  >Edit<span class="sr-only">, </span></a
+                >
               </td>
             </tr>
-
-            <!-- More people... -->
           </tbody>
         </table>
       </div>
