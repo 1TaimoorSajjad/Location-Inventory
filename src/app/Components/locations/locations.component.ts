@@ -9,15 +9,21 @@ import { Router } from '@angular/router';
 })
 export class LocationsComponent implements OnInit {
   locations: any[] = [];
-  constructor(private firestore: Firestore, private router: Router) {}
+  items: any[] = [];
+  collectionRef;
+  itemsRef;
+  constructor(private firestore: Firestore, private router: Router) {
+    this.collectionRef = collection(this.firestore, 'locations');
+    this.itemsRef = collection(this.firestore, 'items');
+  }
 
   ngOnInit(): void {
     this.fetchLocations();
+    this.fetchItems();
   }
 
   fetchLocations() {
-    const collectionRef = collection(this.firestore, 'locations');
-    const q = query(collectionRef);
+    const q = query(this.collectionRef);
 
     getDocs(q)
       .then((querySnapshot) => {
@@ -28,6 +34,19 @@ export class LocationsComponent implements OnInit {
       })
       .catch((error: any) => {
         console.log('Error fetching locations', error);
+      });
+  }
+  fetchItems() {
+    const q = query(this.itemsRef);
+    getDocs(q)
+      .then((querySnapshot) => {
+        this.items = [];
+        querySnapshot.forEach((doc) => {
+          this.items.push(doc.data());
+        });
+      })
+      .catch((error: any) => {
+        console.log('Error fetching items', error);
       });
   }
 

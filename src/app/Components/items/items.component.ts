@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
 })
 export class ItemsComponent implements OnInit {
   items: any[] = [];
-  variants: any[] = []; // Array to hold the variants data
+  variants: any[] = [];
   collectionRef;
-  variantsCollectionRef; // Reference to the variants collection
+  variantsCollectionRef;
   constructor(private router: Router, private firestore: Firestore) {
     this.collectionRef = collection(this.firestore, 'items');
-    this.variantsCollectionRef = collection(this.firestore, 'variants'); // Initialize the variants collection reference
+    this.variantsCollectionRef = collection(this.firestore, 'variants');
   }
 
   ngOnInit(): void {
     this.fetchItems();
-    this.fetchVariants(); // Call the method to fetch the variants data
+    this.fetchVariants();
   }
 
   fetchItems() {

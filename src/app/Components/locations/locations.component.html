@@ -64,7 +64,11 @@
                 {{ location.createdBy }}
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                Member
+                <ul>
+                  <li *ngFor="let item of items">
+                    {{ item.itemName }}
+                  </li>
+                </ul>
               </td>
               <td
                 class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-0"
