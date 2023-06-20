@@ -6,7 +6,7 @@
         <div>
           <label
             class="block text-gray-700 text-sm font-medium mb-2"
-            for="varientName"
+            for="variantName"
             >Variant Name</label
           >
           <input
@@ -20,7 +20,7 @@
         <div>
           <label
             class="block text-gray-700 text-sm font-medium mb-2"
-            for="Quantity"
+            for="quantity"
             >Quantity</label
           >
           <input
@@ -30,6 +30,20 @@
             placeholder=""
             formControlName="quantity"
           />
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-medium mb-2" for="item"
+            >Item</label
+          >
+          <select
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="item"
+            formControlName="item"
+          >
+            <option *ngFor="let item of items" [value]="item.id">
+              {{ item.itemName }}
+            </option>
+          </select>
         </div>
       </div>
 
