@@ -6,9 +6,10 @@
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
       <button
         type="button"
-        class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        (click)="addVariant()"
+        class="block rounded-md bg-indigo-600 px-3 mt-2 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        Add user
+        Add Variants
       </button>
     </div>
   </div>
@@ -36,17 +37,17 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr>
+            <tr *ngFor="let variant of variants">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
-                Lindsay Walton
+                {{ variant.variantName }}
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                Front-end Developer
+                {{ variant.quantity }}
               </td>
               <td
-                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
+                class="relative whitespace-nowrap py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-0"
               >
                 <a href="#" class="text-indigo-600 hover:text-indigo-900"
                   >Edit<span class="sr-only">, Lindsay Walton</span></a

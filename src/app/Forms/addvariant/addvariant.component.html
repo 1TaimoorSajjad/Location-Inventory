@@ -1,1 +1,46 @@
-<p>addvariant works!</p>
+<div class="flex-1 p-6 max-w-5xl">
+  <div class="bg-white rounded-lg shadow-lg p-4 ml-auto">
+    <h2 class="text-2xl font-bold mb-4">Add Variant</h2>
+    <form [formGroup]="variantForm" (submit)="onSubmit()">
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label
+            class="block text-gray-700 text-sm font-medium mb-2"
+            for="varientName"
+            >Variant Name</label
+          >
+          <input
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="variantName"
+            type="text"
+            placeholder=""
+            formControlName="variantName"
+          />
+        </div>
+        <div>
+          <label
+            class="block text-gray-700 text-sm font-medium mb-2"
+            for="Quantity"
+            >Quantity</label
+          >
+          <input
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="quantity"
+            type="text"
+            placeholder=""
+            formControlName="quantity"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end">
+        <button
+          class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2;"
+          type="submit"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

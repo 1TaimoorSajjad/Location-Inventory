@@ -7,6 +7,7 @@ import { AddlocationComponent } from './Forms/addlocation/addlocation.component'
 import { LocationsComponent } from './Components/locations/locations.component';
 import { ItemsComponent } from './Components/items/items.component';
 import { VariantsComponent } from './Components/variants/variants.component';
+import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'variants',
     component: VariantsComponent,
+  },
+  {
+    path: 'addvariant',
+    component: AddvariantComponent,
   },
 ];
 
