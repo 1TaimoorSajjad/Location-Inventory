@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { FeedComponent } from './Components/feed/feed.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReversePipe } from './Pipes/reverse.pipe';
 import { AdditemComponent } from './Forms/additem/additem.component';
 import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
@@ -21,12 +21,25 @@ import { ItemsComponent } from './Components/items/items.component';
 import { VariantsComponent } from './Components/variants/variants.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, FeedComponent, ReversePipe, AdditemComponent, AddlocationComponent, AddvariantComponent, SidenavComponent, LocationsComponent, ItemsComponent, VariantsComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    FeedComponent,
+    ReversePipe,
+    AdditemComponent,
+    AddlocationComponent,
+    AddvariantComponent,
+    SidenavComponent,
+    LocationsComponent,
+    ItemsComponent,
+    VariantsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FirestoreModule,
     FormsModule,
+    ReactiveFormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
