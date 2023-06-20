@@ -11,6 +11,10 @@ import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: LoginComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
