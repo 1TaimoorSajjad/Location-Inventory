@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let item of items">
+            <tr *ngFor="let item of items | reverse">
               <td
                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
               >
@@ -42,7 +42,7 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  <li *ngFor="let variant of variants">
+                  <li *ngFor="let variant of variants | reverse">
                     {{ variant.variantName }}
                   </li>
                 </ul>
