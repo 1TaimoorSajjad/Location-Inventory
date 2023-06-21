@@ -29,20 +29,16 @@ export class VariantsComponent implements OnInit {
     const q = query(variantsRef);
     const querySnapshot = await getDocs(q);
 
-    this.variants = [];
-    for (const doc of querySnapshot.docs) {
+    const variantPromises = querySnapshot.docs.map(async (doc) => {
       const variantData = doc.data();
       const variantId = doc.id;
       const locations = await this.fetchLocationsForVariant(
         variantData.location
       );
-      const variantWithLocations = {
-        id: variantId,
-        ...variantData,
-        locations,
-      };
-      this.variants.push(variantWithLocations);
-    }
+      return { id: variantId, ...variantData, locations };
+    });
+
+    this.variants = await Promise.all(variantPromises);
   }
 
   async fetchLocationsForVariant(locationId: string): Promise<any[]> {

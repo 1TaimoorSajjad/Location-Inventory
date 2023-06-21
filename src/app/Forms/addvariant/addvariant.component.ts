@@ -5,6 +5,8 @@ import {
   collection,
   query,
   getDocs,
+  getDoc,
+  doc,
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +20,7 @@ export class AddvariantComponent implements OnInit {
   variantForm!: FormGroup;
   collectionRef;
   items: any[] = [];
-  locations: any[] = []; // Array to hold the locations
+  locations: any[] = [];
 
   constructor(
     private router: Router,
@@ -33,27 +35,39 @@ export class AddvariantComponent implements OnInit {
       variantName: [''],
       quantity: [''],
       item: [''],
-      location: [''], // Add form control for location
+      location: [''],
     });
 
     this.fetchItems();
-    this.fetchLocations(); // Fetch locations
+    this.fetchLocations();
   }
 
-  fetchItems() {
+  async fetchItems() {
     const itemsRef = collection(this.firestore, 'items');
     const q = query(itemsRef);
 
-    getDocs(q)
-      .then((querySnapshot) => {
-        this.items = [];
-        querySnapshot.forEach((doc) => {
-          this.items.push({ id: doc.id, ...doc.data() });
-        });
-      })
-      .catch((error) => {
-        console.log('Error fetching items', error);
-      });
+    const querySnapshot = await getDocs(q);
+
+    const promises = querySnapshot.docs.map(async (doc) => {
+      const itemData = doc.data();
+      const itemId = doc.id;
+      const locationName = await this.getLocationName(itemData.location);
+      return { id: itemId, ...itemData, locationName };
+    });
+
+    this.items = await Promise.all(promises);
+  }
+
+  async getLocationName(locationId: string): Promise<string> {
+    const locationDocRef = doc(this.firestore, 'locations', locationId);
+    const locationDoc = await getDoc(locationDocRef);
+
+    if (locationDoc.exists()) {
+      const locationData = locationDoc.data();
+      return locationData.locationName;
+    }
+
+    return '';
   }
 
   fetchLocations() {

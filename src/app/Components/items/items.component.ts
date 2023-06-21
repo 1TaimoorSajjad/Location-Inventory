@@ -30,15 +30,19 @@ export class ItemsComponent implements OnInit {
 
     const querySnapshot = await getDocs(q);
 
-    this.items = [];
-    for (const doc of querySnapshot.docs) {
+    const itemPromises = querySnapshot.docs.map(async (doc) => {
       const itemData = doc.data();
       const itemId = doc.id;
-      const variants = await this.fetchVariantsForItem(itemId);
-      const locations = await this.fetchLocationsForItem(itemData.location);
-      const itemWithVariants = { id: itemId, ...itemData, variants, locations };
-      this.items.push(itemWithVariants);
-    }
+      const variantsPromise = this.fetchVariantsForItem(itemId);
+      const locationsPromise = this.fetchLocationsForItem(itemData.location);
+      const [variants, locations] = await Promise.all([
+        variantsPromise,
+        locationsPromise,
+      ]);
+      return { id: itemId, ...itemData, variants, locations };
+    });
+
+    this.items = await Promise.all(itemPromises);
   }
 
   async fetchVariantsForItem(itemId: string): Promise<any[]> {
