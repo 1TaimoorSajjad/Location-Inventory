@@ -1,7 +1,7 @@
 <div
-  class="hidden h-full w-28 overflow-y-auto bg-indigo-900 lg:block border-r border-gray-200"
+  class="h-full w-28 overflow-y-auto bg-indigo-900 border-r border-gray-200 flex flex-col items-center justify-between"
 >
-  <div class="flex w-full flex-col items-center py-6">
+  <div class="flex h-full w-full flex-col items-center py-6">
     <div class="flex flex-shrink-0 items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -46,29 +46,25 @@
 
         <span class="mt-2">Locations</span>
       </a>
-      <div class="">
-        <a
-          routerLink="/items"
-          [routerLinkActive]="['bg-indigo-800', '']"
-          class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      <a
+        routerLink="/items"
+        [routerLinkActive]="['bg-indigo-800', '']"
+        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+      >
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 15 15"
         >
-          <svg
-            class="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 15 15"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M7 7V1h1v6h6v1H8v6H7V8H1V7h6Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span class="mt-2"> Items</span>
-        </a>
-      </div>
-    </div>
-    <div class="mt-auto w-full flex-1 space-y-1 px-2">
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M7 7V1h1v6h6v1H8v6H7V8H1V7h6Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <span class="mt-2"> Items</span>
+      </a>
       <a
         routerLink="/variants"
         [routerLinkActive]="['bg-indigo-800', '']"
@@ -91,8 +87,6 @@
 
         <span class="mt-2">Variants</span>
       </a>
-    </div>
-    <div class="mt-auto w-full flex-1 space-y-1 px-2">
       <button
         (click)="signOut()"
         class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
@@ -114,29 +108,29 @@
         <span class="mt-2">Logout</span>
       </button>
     </div>
-    <div class="mt-auto w-full flex-1 space-y-1 px-2">
-      <button
-        routerLink="/profile"
-        [routerLinkActive]="['bg-indigo-800', '']"
-        class="text-white group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+  </div>
+  <div class="w-full space-y-1 px-2">
+    <button
+      routerLink="/profile"
+      [routerLinkActive]="['bg-indigo-800', '']"
+      class="text-white group w-full p-3 pb-6 rounded-md flex flex-col items-center text-xs font-medium"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-          />
-        </svg>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+        />
+      </svg>
 
-        username
-      </button>
-    </div>
+      username
+    </button>
   </div>
 </div>

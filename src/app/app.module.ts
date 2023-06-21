@@ -19,6 +19,7 @@ import { SidenavComponent } from './Components/Common/sidenav/sidenav.component'
 import { LocationsComponent } from './Components/locations/locations.component';
 import { ItemsComponent } from './Components/items/items.component';
 import { VariantsComponent } from './Components/variants/variants.component';
+import { UsersComponent } from './Components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { VariantsComponent } from './Components/variants/variants.component';
     LocationsComponent,
     ItemsComponent,
     VariantsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
