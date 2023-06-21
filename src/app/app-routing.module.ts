@@ -9,8 +9,13 @@ import { VariantsComponent } from './Components/variants/variants.component';
 import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 import { UsersComponent } from './Components/users/users.component';
 import { LoginComponent } from './Auth/login/login.component';
+import { RegistrationComponent } from './Auth/registration/registration.component';
 
 const routes: Routes = [
+  {
+    path: 'register',
+    component: RegistrationComponent,
+  },
   {
     path: '',
     component: LoginComponent,
