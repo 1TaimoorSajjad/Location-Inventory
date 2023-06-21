@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, collection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 
@@ -12,14 +12,15 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   auth: any;
-  loginCollectionRef;
-  constructor(private firestore: Firestore, private router: Router) {
-    this.loginCollectionRef = collection(this.firestore, 'logins');
-  }
+  loginCollectionRef: any;
+
+  constructor(private firestore: Firestore, private router: Router) {}
 
   ngOnInit(): void {
     this.auth = getAuth();
+    this.loginCollectionRef = collection(this.firestore, 'logincred');
   }
+
   login() {
     console.log('Auth object:', this.auth);
 
@@ -27,20 +28,7 @@ export class LoginComponent implements OnInit {
       .then(() => {
         console.log('Login successful');
         console.log('Current user:', this.auth.currentUser);
-
-        const loginInfo = {
-          email: this.email,
-          timestamp: new Date(),
-        };
-
-        addDoc(this.loginCollectionRef, loginInfo)
-          .then(() => {
-            console.log('Login info saved in Firestore');
-            this.router.navigate(['/dashboard']);
-          })
-          .catch((error) => {
-            console.log('Error saving login info:', error);
-          });
+        this.router.navigate(['/dashboard']);
       })
       .catch((error) => {
         console.log('Error logging in:', error);

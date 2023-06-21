@@ -47,7 +47,6 @@ export class RegistrationComponent implements OnInit {
           contactNumber: this.contactNumber,
         };
 
-        // Create the user document with merged data
         const userDocRef = addDoc(
           collection(this.firestore, 'logincred'),
           userData
