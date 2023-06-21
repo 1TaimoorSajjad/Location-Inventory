@@ -58,14 +58,16 @@
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 {{ location.createdAt }}
               </td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              <td
+                class="whitespace-nowrap px-3 py-4 text-sm mailto:text-gray-500"
+              >
                 {{ location.createdBy }}
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  <li *ngFor="let variant of location.variants">
-                    {{ variant.variantName }}
-                  </li>
+                  {{
+                    location.variantName
+                  }}
                 </ul>
               </td>
               <td

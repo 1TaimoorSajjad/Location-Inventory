@@ -1,11 +1,66 @@
+// import { Component, OnInit } from '@angular/core';
+// import {
+//   Firestore,
+//   collection,
+//   query,
+//   getDocs,
+//   doc,
+//   getDoc,
+// } from '@angular/fire/firestore';
+// import { Router } from '@angular/router';
+
+// @Component({
+//   selector: 'app-locations',
+//   templateUrl: './locations.component.html',
+//   styleUrls: ['./locations.component.css'],
+// })
+// export class LocationsComponent implements OnInit {
+//   locations: any[] = []; // Array to store the locations
+
+//   constructor(private firestore: Firestore, private router: Router) {}
+
+//   async ngOnInit(): Promise<void> {
+//     // Fetch the data from Firestore
+//     const locationsCollection = collection(this.firestore, 'locations');
+//     const locationsQuery = query(locationsCollection);
+//     const locationsSnapshot = await getDocs(locationsQuery);
+
+//     const locationsData = [];
+//     for (const docSnap of locationsSnapshot.docs) {
+//       const locationData = docSnap.data();
+//       const variantId = locationData.variant;
+//       const variantData = await this.getVariantData(variantId);
+//       if (variantData) {
+//         locationData.variantName = variantData.name;
+//       }
+//       locationsData.push(locationData);
+//     }
+
+//     this.locations = locationsData;
+//   }
+
+//   async getVariantData(variantId: string): Promise<any> {
+//     const variantDoc = doc(this.firestore, 'variants', variantId);
+//     const variantSnapshot = await getDoc(variantDoc);
+//     if (variantSnapshot.exists()) {
+//       return variantSnapshot.data();
+//     }
+//     return null;
+//   }
+
+//   addLocation() {
+//     this.router.navigate(['/addlocation']);
+//   }
+// }
+
 import { Component, OnInit } from '@angular/core';
 import {
   Firestore,
   collection,
   query,
   getDocs,
-  where,
   doc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -15,42 +70,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./locations.component.css'],
 })
 export class LocationsComponent implements OnInit {
-  locations: any[] = [];
+  locations: any[] = []; // Array to store the locations
 
   constructor(private firestore: Firestore, private router: Router) {}
 
-  ngOnInit(): void {
-    this.fetchVariantName();
+  async ngOnInit(): Promise<void> {
+    this.getLocation();
   }
 
-  fetchVariantName() {
-    const variantsRef = collection(this.firestore, 'variants');
-    console.log('variantId', variantsRef);
-    // const q = query(variantsRef);
-    const q = query(
-      variantsRef,
-      where('__name__', '==', 'd4o3GUDLA3Qm7ULGdIOm')
-    );
+  async getLocation() {
+    const locationsCollection = collection(this.firestore, 'locations');
+    const locationsQuery = query(locationsCollection);
+    const locationsSnapshot = await getDocs(locationsQuery);
 
-    getDocs(q)
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
+    const locationsData = [];
+    for (const docSnap of locationsSnapshot.docs) {
+      const locationData = docSnap.data();
+      const variantId = locationData.variant;
+      const variantData = await this.getVariantData(variantId);
+      if (variantData) {
+        locationData.variantName = variantData.variantName;
+      }
+      locationsData.push(locationData);
+    }
 
-        const variantDoc = querySnapshot.docs[0];
-        console.log(variantDoc);
-        console.log(variantDoc.data());
-        // if (variantDoc) {
-        //   const variantData = variantDoc.data();
-        //   console.log(variantData, 'Variant Data');
+    this.locations = locationsData;
+  }
 
-        //   return variantData.name;
-        // }
-        // return '';
-      })
-      .catch((error: any) => {
-        console.log('Error fetching variant name', error);
-        // return '';
-      });
+  async getVariantData(variantId: string): Promise<any> {
+    const variantDoc = doc(this.firestore, 'variants', variantId);
+    const variantSnapshot = await getDoc(variantDoc);
+    if (variantSnapshot.exists()) {
+      return variantSnapshot.data();
+    }
+    return null;
   }
 
   addLocation() {
