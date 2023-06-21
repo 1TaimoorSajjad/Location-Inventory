@@ -48,7 +48,7 @@ const routes: Routes = [
     component: AddvariantComponent,
   },
   {
-    path: 'users',
+    path: 'user',
     component: UsersComponent,
   },
 ];
