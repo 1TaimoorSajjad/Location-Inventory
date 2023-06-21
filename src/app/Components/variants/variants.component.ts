@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, getDocs, query } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  query,
+  getDocs,
+  where,
+  doc,
+  getDoc,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,28 +17,46 @@ import { Router } from '@angular/router';
 })
 export class VariantsComponent implements OnInit {
   variants: any[] = [];
-  collectionRef;
-  constructor(private router: Router, private firestore: Firestore) {
-    this.collectionRef = collection(this.firestore, 'variants');
-  }
+
+  constructor(private router: Router, private firestore: Firestore) {}
 
   ngOnInit(): void {
     this.fetchVariants();
   }
 
-  fetchVariants() {
-    const q = query(this.collectionRef);
-    getDocs(q)
-      .then((querySnapshot) => {
-        this.variants = [];
-        querySnapshot.forEach((doc) => {
-          this.variants.push(doc.data());
-        });
-      })
-      .catch((error: any) => {
-        console.log('Error fetching locations', error);
-      });
+  async fetchVariants() {
+    const variantsRef = collection(this.firestore, 'variants');
+    const q = query(variantsRef);
+    const querySnapshot = await getDocs(q);
+
+    this.variants = [];
+    for (const doc of querySnapshot.docs) {
+      const variantData = doc.data();
+      const variantId = doc.id;
+      const locations = await this.fetchLocationsForVariant(
+        variantData.location
+      );
+      const variantWithLocations = {
+        id: variantId,
+        ...variantData,
+        locations,
+      };
+      this.variants.push(variantWithLocations);
+    }
   }
+
+  async fetchLocationsForVariant(locationId: string): Promise<any[]> {
+    const locationDocRef = doc(this.firestore, 'locations', locationId);
+    const locationDoc = await getDoc(locationDocRef);
+
+    if (locationDoc.exists()) {
+      const locationData = locationDoc.data();
+      return [locationData];
+    }
+
+    return [];
+  }
+
   addVariant() {
     this.router.navigate(['/addvariant']);
   }

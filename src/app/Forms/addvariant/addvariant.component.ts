@@ -18,6 +18,7 @@ export class AddvariantComponent implements OnInit {
   variantForm!: FormGroup;
   collectionRef;
   items: any[] = [];
+  locations: any[] = []; // Array to hold the locations
 
   constructor(
     private router: Router,
@@ -32,9 +33,11 @@ export class AddvariantComponent implements OnInit {
       variantName: [''],
       quantity: [''],
       item: [''],
+      location: [''], // Add form control for location
     });
 
     this.fetchItems();
+    this.fetchLocations(); // Fetch locations
   }
 
   fetchItems() {
@@ -50,6 +53,22 @@ export class AddvariantComponent implements OnInit {
       })
       .catch((error) => {
         console.log('Error fetching items', error);
+      });
+  }
+
+  fetchLocations() {
+    const locationsRef = collection(this.firestore, 'locations');
+    const q = query(locationsRef);
+
+    getDocs(q)
+      .then((querySnapshot) => {
+        this.locations = [];
+        querySnapshot.forEach((doc) => {
+          this.locations.push({ id: doc.id, ...doc.data() });
+        });
+      })
+      .catch((error) => {
+        console.log('Error fetching locations', error);
       });
   }
 
