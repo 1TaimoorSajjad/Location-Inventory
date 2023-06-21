@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 export class AdditemComponent implements OnInit {
   itemForm!: FormGroup;
   collectionRef;
-  locations: any[] = [];
 
   constructor(
     private firestore: Firestore,
@@ -31,41 +30,11 @@ export class AdditemComponent implements OnInit {
   ngOnInit(): void {
     this.itemForm = this.fb.group({
       itemName: [''],
-      location: [''],
     });
-
-    this.fetchLocations();
-  }
-
-  fetchLocations() {
-    const locationsRef = collection(this.firestore, 'locations');
-    getDocs(locationsRef)
-      .then((querySnapshot) => {
-        this.locations = [];
-        querySnapshot.forEach((doc) => {
-          this.locations.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-      })
-      .catch((error: any) => {
-        console.log('Error fetching locations', error);
-      });
   }
 
   onSubmit() {
     const formData = this.itemForm.value;
-    const selectedLocationId = formData.location;
-
-    const selectedLocation = this.locations.find(
-      (location) => location.id === selectedLocationId
-    );
-    if (!selectedLocation) {
-      console.log('Invalid location selected');
-      return;
-    }
-
     addDoc(this.collectionRef, formData)
       .then(() => {
         console.log('Item added in the table');

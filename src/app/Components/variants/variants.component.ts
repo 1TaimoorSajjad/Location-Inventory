@@ -32,25 +32,11 @@ export class VariantsComponent implements OnInit {
     const variantPromises = querySnapshot.docs.map(async (doc) => {
       const variantData = doc.data();
       const variantId = doc.id;
-      const locations = await this.fetchLocationsForVariant(
-        variantData.location
-      );
-      return { id: variantId, ...variantData, locations };
+
+      return { id: variantId, ...variantData };
     });
 
     this.variants = await Promise.all(variantPromises);
-  }
-
-  async fetchLocationsForVariant(locationId: string): Promise<any[]> {
-    const locationDocRef = doc(this.firestore, 'locations', locationId);
-    const locationDoc = await getDoc(locationDocRef);
-
-    if (locationDoc.exists()) {
-      const locationData = locationDoc.data();
-      return [locationData];
-    }
-
-    return [];
   }
 
   addVariant() {

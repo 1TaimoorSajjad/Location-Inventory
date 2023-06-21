@@ -20,7 +20,6 @@ export class AddvariantComponent implements OnInit {
   variantForm!: FormGroup;
   collectionRef;
   items: any[] = [];
-  locations: any[] = [];
 
   constructor(
     private router: Router,
@@ -33,13 +32,10 @@ export class AddvariantComponent implements OnInit {
   ngOnInit(): void {
     this.variantForm = this.fb.group({
       variantName: [''],
-      quantity: [''],
       item: [''],
-      location: [''],
     });
 
     this.fetchItems();
-    this.fetchLocations();
   }
 
   async fetchItems() {
@@ -51,39 +47,10 @@ export class AddvariantComponent implements OnInit {
     const promises = querySnapshot.docs.map(async (doc) => {
       const itemData = doc.data();
       const itemId = doc.id;
-      const locationName = await this.getLocationName(itemData.location);
-      return { id: itemId, ...itemData, locationName };
+      return { id: itemId, ...itemData };
     });
 
     this.items = await Promise.all(promises);
-  }
-
-  async getLocationName(locationId: string): Promise<string> {
-    const locationDocRef = doc(this.firestore, 'locations', locationId);
-    const locationDoc = await getDoc(locationDocRef);
-
-    if (locationDoc.exists()) {
-      const locationData = locationDoc.data();
-      return locationData.locationName;
-    }
-
-    return '';
-  }
-
-  fetchLocations() {
-    const locationsRef = collection(this.firestore, 'locations');
-    const q = query(locationsRef);
-
-    getDocs(q)
-      .then((querySnapshot) => {
-        this.locations = [];
-        querySnapshot.forEach((doc) => {
-          this.locations.push({ id: doc.id, ...doc.data() });
-        });
-      })
-      .catch((error) => {
-        console.log('Error fetching locations', error);
-      });
   }
 
   onSubmit() {
