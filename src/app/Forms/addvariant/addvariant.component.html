@@ -41,7 +41,7 @@
             formControlName="item"
           >
             <option *ngFor="let item of items" [value]="item.id">
-              {{ item.itemName }}
+              {{ item.itemName }} - {{ item.location }}
             </option>
           </select>
         </div>
