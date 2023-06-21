@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './Components/login/login.component';
 import { FeedComponent } from './Components/feed/feed.component';
 import { AdditemComponent } from './Forms/additem/additem.component';
 import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
@@ -9,6 +8,7 @@ import { ItemsComponent } from './Components/items/items.component';
 import { VariantsComponent } from './Components/variants/variants.component';
 import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 import { UsersComponent } from './Components/users/users.component';
+import { LoginComponent } from './Auth/login/login.component';
 
 const routes: Routes = [
   {
