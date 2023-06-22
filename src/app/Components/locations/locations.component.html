@@ -71,16 +71,16 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  {{
-                    location.variantName
-                  }}
+                  <li *ngFor="let location of location.variants">
+                    {{ location.variant }}
+                  </li>
                 </ul>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  {{
-                    location.quantity
-                  }}
+                  <li *ngFor="let location of location.variants">
+                    {{ location.quantity }}
+                  </li>
                 </ul>
               </td>
               <td

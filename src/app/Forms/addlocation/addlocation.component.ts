@@ -36,13 +36,24 @@ export class AddlocationComponent implements OnInit {
       locationName: [''],
       createdAt: [''],
       createdBy: [''],
-      item: [''],
-      variant: [''],
-      quantity: [''],
+
+      variants: this.fb.array([]),
     });
 
     this.fetchItems();
     this.fetchVariants();
+  }
+
+  getVariants() {
+    return this.locationForm.get('variants') as FormArray;
+  }
+
+  addVariant() {
+    const variantFormGroup = this.fb.group({
+      variant: [''],
+      quantity: [''],
+    });
+    this.getVariants().push(variantFormGroup);
   }
 
   async fetchItems() {

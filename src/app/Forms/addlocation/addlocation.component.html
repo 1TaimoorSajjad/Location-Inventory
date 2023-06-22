@@ -53,34 +53,58 @@
       <div
         class="sm:col-span-6 space-y-6 bg-main-base-100 border-2 border-dashed border-main-base p-4 rounded-lg ng-star-inserted"
       >
-        <div class="mt-6">
-          <div class="text-lg font-medium leading-6 text-main-dark mb-4">
-            Add Variant
+        <div class="mt-6" formArrayName="variants">
+          <div
+            *ngFor="let variantGroup of getVariants().controls; let i = index"
+          >
+            <div [formGroupName]="i">
+              <div class="text-md font-medium leading-6 text-main-dark mb-4">
+                Add Variant {{ i + 1 }}
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Variant</label
+                  >
+                  <select
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    formControlName="variant"
+                  >
+                    <option value="">Select a variant</option>
+                    <option
+                      *ngFor="let variant of variants"
+                      [value]="variant.id"
+                    >
+                      {{ variant.variantName }}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-gray-700 text-sm font-medium mb-2"
+                    >Quantity</label
+                  >
+                  <input
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    placeholder=""
+                    formControlName="quantity"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <select
-            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option value="">Select a variant</option>
-            <option *ngFor="let variant of variants" [value]="variant.id">
-              {{ variant.variantName }}
-            </option>
-          </select>
         </div>
-        <div class="mt-6 mb-4">
-          <label
-            class="block text-gray-700 text-sm font-medium mb-2"
-            for="quantity"
-            >Quantity</label
+        <div class="flex justify-end">
+          <button
+            class="inline-flex items-center mt-2 justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+            type="button"
+            (click)="addVariant()"
           >
-          <input
-            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="quantity"
-            type="text"
-            placeholder=""
-            formControlName="quantity"
-          />
+            Add Variant
+          </button>
         </div>
       </div>
+
       <div class="flex items-center justify-end">
         <button
           class="inline-flex items-center mt-2 justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2;"
