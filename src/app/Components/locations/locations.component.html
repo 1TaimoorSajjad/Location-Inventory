@@ -71,15 +71,15 @@
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  <li *ngFor="let location of location.variants">
-                    {{ location.variant }}
+                  <li *ngFor="let variants of location.variants">
+                    {{ variants.variant }}
                   </li>
                 </ul>
               </td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                 <ul>
-                  <li *ngFor="let location of location.variants">
-                    {{ location.quantity }}
+                  <li *ngFor="let variants of location.variants">
+                    {{ variants.quantity }}
                   </li>
                 </ul>
               </td>
