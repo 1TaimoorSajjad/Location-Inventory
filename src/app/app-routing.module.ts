@@ -37,6 +37,10 @@ const routes: Routes = [
     component: AddlocationComponent,
   },
   {
+    path: 'location/edit/:id',
+    component: AddlocationComponent,
+  },
+  {
     path: 'locations',
     component: LocationsComponent,
   },
