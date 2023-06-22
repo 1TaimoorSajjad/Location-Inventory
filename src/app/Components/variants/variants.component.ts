@@ -25,20 +25,31 @@ export class VariantsComponent implements OnInit {
   }
 
   async fetchVariants() {
-    const variantsRef = collection(this.firestore, 'variants');
-    const q = query(variantsRef);
-    const querySnapshot = await getDocs(q);
+    const variantsCollection = collection(this.firestore, 'variants');
+    const variantQuery = query(variantsCollection);
+    const variantSnapshot = await getDocs(variantQuery);
 
-    const variantPromises = querySnapshot.docs.map(async (doc) => {
-      const variantData = doc.data();
-      const variantId = doc.id;
+    const variantsData = [];
+    for (const docSnap of variantSnapshot.docs) {
+      const variantData = docSnap.data();
+      const itemId = variantData.item;
+      const itemData = await this.getItemData(itemId);
+      if (itemData) {
+        variantData.itemName = itemData.itemName;
+      }
+      variantsData.push(variantData);
+    }
 
-      return { id: variantId, ...variantData };
-    });
-
-    this.variants = await Promise.all(variantPromises);
+    this.variants = variantsData;
   }
-
+  async getItemData(itemId: string): Promise<any> {
+    const itemDoc = doc(this.firestore, 'items', itemId);
+    const itemSnapshot = await getDoc(itemDoc);
+    if (itemSnapshot.exists()) {
+      return itemSnapshot.data();
+    }
+    return null;
+  }
   addVariant() {
     this.router.navigate(['/addvariant']);
   }
