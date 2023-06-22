@@ -59,7 +59,6 @@
           </div>
           <select
             class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            formControlName="variant"
           >
             <option value="">Select a variant</option>
             <option *ngFor="let variant of variants" [value]="variant.id">
@@ -82,7 +81,6 @@
           />
         </div>
       </div>
-
       <div class="flex items-center justify-end">
         <button
           class="inline-flex items-center mt-2 justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2;"

@@ -8,7 +8,7 @@ import {
   getDocs,
   query,
 } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,12 +37,24 @@ export class AddlocationComponent implements OnInit {
       createdAt: [''],
       createdBy: [''],
       item: [''],
-      variant: [''],
-      quantity: [''],
+      variants: this.fb.array([]),
+      quantities: this.fb.array([]),
     });
 
     this.fetchItems();
     this.fetchVariants();
+  }
+  get variantControls(): FormArray {
+    return this.locationForm.get('variants') as FormArray;
+  }
+
+  get quantityControls(): FormArray {
+    return this.locationForm.get('quantities') as FormArray;
+  }
+
+  addVariant(): void {
+    this.variantControls.push(this.fb.control(''));
+    this.quantityControls.push(this.fb.control(''));
   }
 
   async fetchItems() {
@@ -54,7 +66,12 @@ export class AddlocationComponent implements OnInit {
     const promises = querySnapshot.docs.map(async (doc) => {
       const itemData = doc.data();
       const itemId = doc.id;
-      const locationName = await this.getLocationName(itemData.location);
+      const locationId = itemData.location;
+
+      const locationName = locationId
+        ? await this.getLocationName(locationId)
+        : '';
+
       return { id: itemId, ...itemData, locationName };
     });
 
