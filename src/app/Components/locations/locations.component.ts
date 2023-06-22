@@ -31,13 +31,28 @@ export class LocationsComponent implements OnInit {
     const locationsData = [];
     for (const docSnap of locationsSnapshot.docs) {
       const locationData = docSnap.data();
-      const variantId = locationData.variant;
-      if (typeof variantId === 'string') {
-        const variantData = await this.getVariantData(variantId);
-        if (variantData) {
-          locationData.variantName = variantData.variantName;
+      // const variantsData = locationData.variants;
+      console.log(locationData, 'mojojo');
+
+      console.log(locationData.variants, 'location ka data');
+
+      for (let variantsData of locationData.variants) {
+        // console.log(variantsData);
+        if (variantsData && typeof variantsData.variant === 'string') {
+          const variantData = await this.getVariantData(variantsData.variant);
+          if (variantData) {
+            variantsData.variant = variantData.variantName;
+          }
         }
       }
+
+      // if (typeof variantsData === 'string') {
+      //   const variantData = await this.getVariantData(variantsData);
+      //   if (variantData) {
+      //     locationData.variantName = variantData.variantName;
+      //   }
+      // }
+
       locationsData.push(locationData);
     }
     this.locations = locationsData;
