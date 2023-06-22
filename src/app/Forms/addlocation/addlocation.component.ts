@@ -38,6 +38,7 @@ export class AddlocationComponent implements OnInit {
       createdBy: [''],
       item: [''],
       variant: [''],
+      quantity: [''],
     });
 
     this.fetchItems();

@@ -49,30 +49,38 @@
           />
         </div>
       </div>
-      <div class="mt-6">
-        <h2 class="text-2xl font-bold mb-4">Items</h2>
-        <select
-          class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          formControlName="item"
-        >
-          <option value="">Select an item</option>
-          <option *ngFor="let item of items" [value]="item.id">
-            {{ item.itemName }} - {{ item.locationName }}
-          </option>
-        </select>
-      </div>
 
-      <div class="mt-6">
-        <h2 class="text-2xl font-bold mb-4">Variants</h2>
-        <select
-          class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          formControlName="variant"
-        >
-          <option value="">Select a variant</option>
-          <option *ngFor="let variant of variants" [value]="variant.id">
-            {{ variant.variantName }}
-          </option>
-        </select>
+      <div
+        class="sm:col-span-6 space-y-6 bg-main-base-100 border-2 border-dashed border-main-base p-4 rounded-lg ng-star-inserted"
+      >
+        <div class="mt-6">
+          <div class="text-lg font-medium leading-6 text-main-dark mb-4">
+            Add Variant
+          </div>
+          <select
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            formControlName="variant"
+          >
+            <option value="">Select a variant</option>
+            <option *ngFor="let variant of variants" [value]="variant.id">
+              {{ variant.variantName }}
+            </option>
+          </select>
+        </div>
+        <div class="mt-6 mb-4">
+          <label
+            class="block text-gray-700 text-sm font-medium mb-2"
+            for="quantity"
+            >Quantity</label
+          >
+          <input
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="quantity"
+            type="text"
+            placeholder=""
+            formControlName="quantity"
+          />
+        </div>
       </div>
 
       <div class="flex items-center justify-end">
