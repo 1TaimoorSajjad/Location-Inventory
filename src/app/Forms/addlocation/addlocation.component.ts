@@ -8,7 +8,7 @@ import {
   getDocs,
   query,
 } from '@angular/fire/firestore';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,24 +37,12 @@ export class AddlocationComponent implements OnInit {
       createdAt: [''],
       createdBy: [''],
       item: [''],
-      variants: this.fb.array([]),
-      quantities: this.fb.array([]),
+      variant: [''],
+      quantity: [''],
     });
 
     this.fetchItems();
     this.fetchVariants();
-  }
-  get variantControls(): FormArray {
-    return this.locationForm.get('variants') as FormArray;
-  }
-
-  get quantityControls(): FormArray {
-    return this.locationForm.get('quantities') as FormArray;
-  }
-
-  addVariant(): void {
-    this.variantControls.push(this.fb.control(''));
-    this.quantityControls.push(this.fb.control(''));
   }
 
   async fetchItems() {
