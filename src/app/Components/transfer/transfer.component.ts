@@ -22,7 +22,7 @@ import {
 export class TransferComponent implements OnInit {
   registerForm!: FormGroup;
   variants: any[] = [];
-  locations: any[] = []; // Stores the locations data
+  locations: any[] = [];
   locationRef;
   transferRef;
 
@@ -40,11 +40,11 @@ export class TransferComponent implements OnInit {
 
   async getLocations() {
     const locationSnapshot = await getDocs(query(this.locationRef));
-    const locations = locationSnapshot.docs.map((doc) => ({
+    this.locations = locationSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    console.log(locations); // or assign to a variable or use in the template
+    console.log(this.locations);
   }
 
   getVariants(): FormArray {
@@ -54,7 +54,7 @@ export class TransferComponent implements OnInit {
   addVariant(): void {
     const variantGroup = this.formBuilder.group({
       variant: ['', Validators.required],
-      quantity: ['', Validators.required],
+      quantity: [''],
     });
 
     this.getVariants().push(variantGroup);
@@ -66,6 +66,32 @@ export class TransferComponent implements OnInit {
       locationTo: ['', Validators.required],
       variants: this.formBuilder.array([]),
     });
+  }
+
+  onLocationChange(): void {
+    const selectedLocationId = this.registerForm.get('locationFrom')?.value;
+    const selectedLocation = this.locations.find(
+      (location) => location.id === selectedLocationId
+    );
+    if (selectedLocation) {
+      const variants = this.getVariants();
+      variants.clear();
+
+      selectedLocation.variants.forEach((variant: any) => {
+        const variantGroup = this.formBuilder.group({
+          variant: [variant.variantName, Validators.required],
+          quantity: ['', Validators.required],
+        });
+        variants.push(variantGroup);
+      });
+    }
+  }
+  getVariantsForSelectedLocation(): any[] {
+    const selectedLocationId = this.registerForm.get('locationFrom')?.value;
+    const selectedLocation = this.locations.find(
+      (location) => location.id === selectedLocationId
+    );
+    return selectedLocation ? selectedLocation.variants : [];
   }
 
   transferVariant() {}
