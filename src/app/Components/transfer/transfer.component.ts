@@ -44,7 +44,7 @@ export class TransferComponent implements OnInit {
       id: doc.id,
       ...doc.data(),
     }));
-    console.log(this.locations);
+    // console.log(this.locations);
   }
 
   getVariants(): FormArray {
@@ -54,7 +54,7 @@ export class TransferComponent implements OnInit {
   addVariant(): void {
     const variantGroup = this.formBuilder.group({
       variant: ['', Validators.required],
-      quantity: [''],
+      quantity: ['', Validators.required],
     });
 
     this.getVariants().push(variantGroup);
@@ -73,25 +73,31 @@ export class TransferComponent implements OnInit {
     const selectedLocation = this.locations.find(
       (location) => location.id === selectedLocationId
     );
+
     if (selectedLocation) {
+      this.variants = selectedLocation.variants;
       const variants = this.getVariants();
       variants.clear();
 
       selectedLocation.variants.forEach((variant: any) => {
         const variantGroup = this.formBuilder.group({
-          variant: [variant.variantName, Validators.required],
-          quantity: ['', Validators.required],
+          variant: [variant.variant, Validators.required],
+          quantity: [variant.quantity, Validators.required],
         });
         variants.push(variantGroup);
       });
     }
   }
-  getVariantsForSelectedLocation(): any[] {
+
+  getVariantNamesForIndex(index: number): string {
     const selectedLocationId = this.registerForm.get('locationFrom')?.value;
     const selectedLocation = this.locations.find(
       (location) => location.id === selectedLocationId
     );
-    return selectedLocation ? selectedLocation.variants : [];
+    const variantId = selectedLocation?.variants[index].variant;
+    const variant = this.variants.find((v) => v.id === variantId);
+
+    return variant ? variant.variantName : '';
   }
 
   transferVariant() {}
