@@ -6,6 +6,7 @@ import {
   getDocs,
   doc,
   getDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -71,5 +72,19 @@ export class LocationsComponent implements OnInit {
 
   addLocation() {
     this.router.navigate(['/addlocation']);
+  }
+
+  editUser() {}
+  deleteUser(id: string) {
+    if (id) {
+      const documentRef = doc(this.firestore, 'locations', id);
+      deleteDoc(documentRef)
+        .then(() => {
+          console.log('Document deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting document: ', error);
+        });
+    }
   }
 }
