@@ -40,22 +40,25 @@
       <table class="border-collapse w-full">
         <thead>
           <tr>
+            <th class="border border-gray-300 px-4 py-2"></th>
             <th class="border border-gray-300 px-4 py-2">Variant</th>
             <th class="border border-gray-300 px-4 py-2">Quantity</th>
           </tr>
         </thead>
         <tbody>
           <ng-container formArrayName="variants">
-            <tr
-              *ngFor="let variant of getVariants().controls; let i = index"
-              [formGroupName]="i"
-            >
-              <td class="border border-gray-300 px-4 py-2 text-center">
-                {{ getVariantNamesForIndex(i) }}
-              </td>
-              <td class="border border-gray-300 px-4 py-2 text-center">
-                <input type="text" formControlName="quantity" />
-              </td>
+            <tr *ngFor="let variant of getVariants().controls; let i = index">
+              <ng-container [formGroupName]="i">
+                <td class="border border-gray-300 px-4 py-2 text-center">
+                  <input type="checkbox" formControlName="selected" />
+                </td>
+                <td class="border border-gray-300 px-4 py-2 text-center">
+                  {{ variant.value.variant }}
+                </td>
+                <td class="border border-gray-300 px-4 py-2 text-center">
+                  <input type="text" formControlName="quantity" />
+                </td>
+              </ng-container>
             </tr>
           </ng-container>
         </tbody>
@@ -65,6 +68,7 @@
         <button
           class="inline-flex items-center mt-2 justify-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-600/90 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2;"
           type="submit"
+          (click)="transferVariant()"
         >
           Transfer
         </button>

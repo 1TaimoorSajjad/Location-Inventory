@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  query,
-  getDocs,
-  where,
-} from '@angular/fire/firestore';
+import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
 import {
   FormGroup,
   FormArray,
@@ -36,7 +30,10 @@ export class TransferComponent implements OnInit {
     this.initializeForm();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const formData = this.registerForm.value;
+    console.log(formData);
+  }
 
   async getLocations() {
     const locationSnapshot = await getDocs(query(this.locationRef));
@@ -44,7 +41,6 @@ export class TransferComponent implements OnInit {
       id: doc.id,
       ...doc.data(),
     }));
-    // console.log(this.locations);
   }
 
   getVariants(): FormArray {
@@ -55,6 +51,8 @@ export class TransferComponent implements OnInit {
     const variantGroup = this.formBuilder.group({
       variant: ['', Validators.required],
       quantity: ['', Validators.required],
+      transferQuantity: [''],
+      selected: [false],
     });
 
     this.getVariants().push(variantGroup);
@@ -83,22 +81,11 @@ export class TransferComponent implements OnInit {
         const variantGroup = this.formBuilder.group({
           variant: [variant.variant, Validators.required],
           quantity: [variant.quantity, Validators.required],
+          selected: [false],
         });
         variants.push(variantGroup);
       });
     }
   }
-
-  getVariantNamesForIndex(index: number): string {
-    const selectedLocationId = this.registerForm.get('locationFrom')?.value;
-    const selectedLocation = this.locations.find(
-      (location) => location.id === selectedLocationId
-    );
-    const variantId = selectedLocation?.variants[index].variant;
-    const variant = this.variants.find((v) => v.id === variantId);
-
-    return variant ? variant.variantName : '';
-  }
-
   transferVariant() {}
 }
