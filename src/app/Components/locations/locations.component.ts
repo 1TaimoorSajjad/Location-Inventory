@@ -74,7 +74,9 @@ export class LocationsComponent implements OnInit {
     this.router.navigate(['/addlocation']);
   }
 
-  editUser() {}
+  editUser() {
+    this.router.navigate(['/addlocation']);
+  }
   deleteUser(id: string) {
     if (id) {
       const documentRef = doc(this.firestore, 'locations', id);

@@ -21,6 +21,7 @@ import { VariantsComponent } from './Components/variants/variants.component';
 import { UsersComponent } from './Components/users/users.component';
 import { RegistrationComponent } from './Auth/registration/registration.component';
 import { LoginComponent } from './Auth/login/login.component';
+import { TransferComponent } from './Components/transfer/transfer.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginComponent } from './Auth/login/login.component';
     UsersComponent,
     RegistrationComponent,
     LoginComponent,
+    TransferComponent,
   ],
   imports: [
     BrowserModule,

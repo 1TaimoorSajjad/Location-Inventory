@@ -10,6 +10,7 @@ import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
 import { UsersComponent } from './Components/users/users.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { RegistrationComponent } from './Auth/registration/registration.component';
+import { TransferComponent } from './Components/transfer/transfer.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UsersComponent,
+  },
+  {
+    path: 'transfer',
+    component: TransferComponent,
   },
 ];
 

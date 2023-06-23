@@ -53,7 +53,7 @@
       <div
         class="sm:col-span-6 space-y-6 bg-main-base-100 border-2 border-dashed border-main-base p-4 rounded-lg ng-star-inserted"
       >
-        <div class="mt-6" formArrayName="variants">
+        <div class="flex flex-col gap-4" formArrayName="variants">
           <div
             *ngFor="let variantGroup of getVariants().controls; let i = index"
           >
