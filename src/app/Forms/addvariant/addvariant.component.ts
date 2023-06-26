@@ -20,6 +20,7 @@ export class AddvariantComponent implements OnInit {
   variantForm!: FormGroup;
   collectionRef;
   items: any[] = [];
+  locations: any[] = [];
 
   constructor(
     private router: Router,
@@ -33,6 +34,7 @@ export class AddvariantComponent implements OnInit {
     this.variantForm = this.fb.group({
       variantName: [''],
       item: [''],
+      quantity: [''],
     });
 
     this.fetchItems();

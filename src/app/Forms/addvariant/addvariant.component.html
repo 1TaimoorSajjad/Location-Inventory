@@ -32,6 +32,31 @@
             </option>
           </select>
         </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-medium mb-2"
+            >Location</label
+          >
+          <select
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            formControlName="locationTo"
+          >
+            <option value="">Select a location</option>
+            <option *ngFor="let location of locations" [value]="location.id">
+              {{ location.locationName }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-medium mb-2"
+            >Quantity</label
+          >
+          <input
+            class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder=""
+            formControlName="quantity"
+          />
+        </div>
       </div>
 
       <div class="flex items-center justify-end">
