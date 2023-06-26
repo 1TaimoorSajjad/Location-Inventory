@@ -34,6 +34,8 @@ export class LocationsComponent implements OnInit {
         const locationsData = [];
         for (const docSnap of locationsSnapshot.docs) {
           const locationData = docSnap.data();
+          const locationId = docSnap.id; // Get the document ID
+
           for (let variantsData of locationData.variants) {
             if (variantsData && typeof variantsData.variant === 'string') {
               this.getVariantData(variantsData.variant)
@@ -47,6 +49,8 @@ export class LocationsComponent implements OnInit {
                 });
             }
           }
+          locationData.id = locationId; // Add the id property with the document ID
+
           locationsData.push(locationData);
         }
         this.locations = locationsData;

@@ -17,27 +17,33 @@ import { Router } from '@angular/router';
 })
 export class VariantsComponent implements OnInit {
   variants: any[] = [];
+  variantsCollectionRef;
 
-  constructor(private router: Router, private firestore: Firestore) {}
+  constructor(private router: Router, private firestore: Firestore) {
+    this.variantsCollectionRef = collection(this.firestore, 'variants');
+  }
 
   ngOnInit(): void {
     this.fetchVariants();
   }
 
   fetchVariants() {
-    const variantsCollection = collection(this.firestore, 'variants');
-    const variantQuery = query(variantsCollection);
+    const variantQuery = query(this.variantsCollectionRef);
 
     getDocs(variantQuery)
       .then((variantSnapshot) => {
         const promises = variantSnapshot.docs.map((docSnap) => {
           const variantData = docSnap.data();
+          const variantId = docSnap.id;
+
           const itemId = variantData.item;
 
           return this.getItemData(itemId).then((itemData) => {
             if (itemData) {
               variantData.itemName = itemData.itemName;
             }
+            variantData.id = variantId;
+
             return variantData;
           });
         });
@@ -73,6 +79,7 @@ export class VariantsComponent implements OnInit {
   }
 
   editVariant(variantId: any) {
+    console.log('id', variantId);
     this.router.navigate(['/variants/edit/' + variantId]);
   }
   deleteVariant() {}
