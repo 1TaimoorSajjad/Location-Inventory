@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'register',
     component: RegistrationComponent,
   },
+  { path: 'items/edit/:id', component: AdditemComponent },
   {
     path: '',
     component: LoginComponent,

@@ -51,6 +51,11 @@ export class ItemsComponent implements OnInit {
     this.router.navigate(['/additem']);
   }
 
-  editItem() {}
+  editItem(itemId: string) {
+    console.log('ds', itemId);
+
+    this.router.navigate(['/items/edit/' + itemId]);
+  }
+
   deleteItem() {}
 }
