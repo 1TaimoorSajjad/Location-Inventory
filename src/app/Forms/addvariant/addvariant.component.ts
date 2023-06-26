@@ -40,19 +40,26 @@ export class AddvariantComponent implements OnInit {
     this.fetchItems();
   }
 
-  async fetchItems() {
+  fetchItems() {
     const itemsRef = collection(this.firestore, 'items');
     const q = query(itemsRef);
 
-    const querySnapshot = await getDocs(q);
+    getDocs(q)
+      .then((querySnapshot) => {
+        const promises = querySnapshot.docs.map((doc) => {
+          const itemData = doc.data();
+          const itemId = doc.id;
+          return { id: itemId, ...itemData };
+        });
 
-    const promises = querySnapshot.docs.map(async (doc) => {
-      const itemData = doc.data();
-      const itemId = doc.id;
-      return { id: itemId, ...itemData };
-    });
-
-    this.items = await Promise.all(promises);
+        return Promise.all(promises);
+      })
+      .then((items) => {
+        this.items = items;
+      })
+      .catch((error) => {
+        console.log('Error fetching items: ', error);
+      });
   }
 
   onSubmit() {

@@ -24,32 +24,50 @@ export class VariantsComponent implements OnInit {
     this.fetchVariants();
   }
 
-  async fetchVariants() {
+  fetchVariants() {
     const variantsCollection = collection(this.firestore, 'variants');
     const variantQuery = query(variantsCollection);
-    const variantSnapshot = await getDocs(variantQuery);
 
-    const variantsData = [];
-    for (const docSnap of variantSnapshot.docs) {
-      const variantData = docSnap.data();
-      const itemId = variantData.item;
-      const itemData = await this.getItemData(itemId);
-      if (itemData) {
-        variantData.itemName = itemData.itemName;
-      }
-      variantsData.push(variantData);
-    }
+    getDocs(variantQuery)
+      .then((variantSnapshot) => {
+        const promises = variantSnapshot.docs.map((docSnap) => {
+          const variantData = docSnap.data();
+          const itemId = variantData.item;
 
-    this.variants = variantsData;
+          return this.getItemData(itemId).then((itemData) => {
+            if (itemData) {
+              variantData.itemName = itemData.itemName;
+            }
+            return variantData;
+          });
+        });
+
+        return Promise.all(promises);
+      })
+      .then((variantsData) => {
+        this.variants = variantsData;
+      })
+      .catch((error) => {
+        console.error('Error fetching variants: ', error);
+      });
   }
-  async getItemData(itemId: string): Promise<any> {
+
+  getItemData(itemId: string): Promise<any> {
     const itemDoc = doc(this.firestore, 'items', itemId);
-    const itemSnapshot = await getDoc(itemDoc);
-    if (itemSnapshot.exists()) {
-      return itemSnapshot.data();
-    }
-    return null;
+
+    return getDoc(itemDoc)
+      .then((itemSnapshot) => {
+        if (itemSnapshot.exists()) {
+          return itemSnapshot.data();
+        }
+        return null;
+      })
+      .catch((error) => {
+        console.error('Error getting item data: ', error);
+        return null;
+      });
   }
+
   addVariant() {
     this.router.navigate(['/addvariant']);
   }
