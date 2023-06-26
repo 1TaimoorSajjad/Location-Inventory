@@ -24,20 +24,27 @@ export class ItemsComponent implements OnInit {
     this.fetchItems();
   }
 
-  async fetchItems() {
+  fetchItems() {
     const itemsRef = collection(this.firestore, 'items');
     const q = query(itemsRef);
 
-    const querySnapshot = await getDocs(q);
+    getDocs(q)
+      .then((querySnapshot) => {
+        const itemPromises = querySnapshot.docs.map((doc) => {
+          const itemData = doc.data();
+          const itemId = doc.id;
 
-    const itemPromises = querySnapshot.docs.map(async (doc) => {
-      const itemData = doc.data();
-      const itemId = doc.id;
+          return { id: itemId, ...itemData };
+        });
 
-      return { id: itemId, ...itemData };
-    });
-
-    this.items = await Promise.all(itemPromises);
+        return Promise.all(itemPromises);
+      })
+      .then((items) => {
+        this.items = items;
+      })
+      .catch((error) => {
+        console.error('Error fetching items: ', error);
+      });
   }
 
   addItem() {
