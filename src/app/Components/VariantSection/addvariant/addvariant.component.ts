@@ -23,7 +23,7 @@ export class AddvariantComponent implements OnInit {
   items: any[] = [];
   locations: any[] = [];
   documentId: string = '';
-
+  locationcollectionRef;
   constructor(
     private router: Router,
     private firestore: Firestore,
@@ -31,6 +31,7 @@ export class AddvariantComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.variantcollectionRef = collection(this.firestore, 'variants');
+    this.locationcollectionRef = collection(this.firestore, 'locations');
   }
 
   ngOnInit(): void {
@@ -41,6 +42,8 @@ export class AddvariantComponent implements OnInit {
     });
 
     this.fetchItems();
+    this.getLocations();
+
     this.route.params.subscribe((params) => {
       const userId = params['id'];
       if (userId) {
@@ -87,6 +90,19 @@ export class AddvariantComponent implements OnInit {
       })
       .catch((error) => {
         console.log('Error fetching items: ', error);
+      });
+  }
+
+  getLocations() {
+    getDocs(query(this.locationcollectionRef))
+      .then((locationSnapshot) => {
+        this.locations = locationSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+      .catch((error) => {
+        console.error('Error fetching locations: ', error);
       });
   }
 

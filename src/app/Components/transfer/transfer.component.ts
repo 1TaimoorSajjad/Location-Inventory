@@ -35,12 +35,17 @@ export class TransferComponent implements OnInit {
     console.log(formData);
   }
 
-  async getLocations() {
-    const locationSnapshot = await getDocs(query(this.locationRef));
-    this.locations = locationSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+  getLocations() {
+    getDocs(query(this.locationRef))
+      .then((locationSnapshot) => {
+        this.locations = locationSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+      .catch((error) => {
+        console.error('Error fetching locations: ', error);
+      });
   }
 
   getVariants(): FormArray {
