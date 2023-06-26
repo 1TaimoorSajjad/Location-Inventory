@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  CollectionReference,
-  DocumentData,
   Firestore,
   addDoc,
   collection,
@@ -25,8 +23,7 @@ export class AddlocationComponent implements OnInit {
   items: any[] = [];
   variants: any[] = [];
   locations: any[] = [];
-  collectionRef: CollectionReference<DocumentData>;
-  editLocationId: string | null = null;
+  collectionRef;
 
   constructor(
     private firestore: Firestore,
@@ -48,36 +45,6 @@ export class AddlocationComponent implements OnInit {
 
     this.fetchItems();
     this.fetchVariants();
-    this.editLocationId = this.route.snapshot.paramMap.get('id');
-    if (this.editLocationId) {
-      this.fetchLocationData();
-    }
-  }
-
-  fetchLocationData() {
-    const locationDocRef = doc(this.collectionRef, this.editLocationId!);
-    getDoc(locationDocRef)
-      .then((locationDoc) => {
-        if (locationDoc.exists()) {
-          const locationData = locationDoc.data();
-          this.locationForm.patchValue(locationData);
-          // Patch the variants data
-          const variantsData = locationData.variants || [];
-          const variantControls = this.getVariants();
-          variantControls.clear();
-          for (const variant of variantsData) {
-            variantControls.push(
-              this.fb.group({
-                variant: [variant.variant],
-                quantity: [variant.quantity],
-              })
-            );
-          }
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching location data: ', error);
-      });
   }
 
   getVariants() {
@@ -154,28 +121,13 @@ export class AddlocationComponent implements OnInit {
 
   onSubmit() {
     const formData = this.locationForm.value;
-
-    if (this.editLocationId) {
-      // Update the existing location
-      const locationDocRef = doc(this.collectionRef, this.editLocationId);
-      updateDoc(locationDocRef, formData)
-        .then(() => {
-          console.log('Location data updated successfully');
-          this.router.navigate(['/add-location']);
-        })
-        .catch((error: any) => {
-          console.log('Error updating data in Firestore', error);
-        });
-    } else {
-      // Create a new location
-      addDoc(this.collectionRef, formData)
-        .then(() => {
-          console.log('Location data added successfully');
-          this.router.navigate(['/add-location']);
-        })
-        .catch((error: any) => {
-          console.log('Error sending data to Firestore', error);
-        });
-    }
+    addDoc(this.collectionRef, formData)
+      .then(() => {
+        console.log('Location data added successfully');
+        this.router.navigate(['/add-location']);
+      })
+      .catch((error: any) => {
+        console.log('Error sending data to Firestore', error);
+      });
   }
 }
