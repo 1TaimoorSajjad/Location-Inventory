@@ -8,7 +8,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeedComponent } from './Components/feed/feed.component';
+import { FeedComponent } from './Components/dashboard/feed.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReversePipe } from './Pipes/reverse.pipe';
 import { AddvariantComponent } from './Components/VariantSection/addvariant/addvariant.component';

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeedComponent } from './Components/feed/feed.component';
+import { FeedComponent } from './Components/dashboard/feed.component';
 import { AdditemComponent } from './Components/ItemSection/additem/additem.component';
 import { ItemsComponent } from './Components/ItemSection/items/items.component';
 import { VariantsComponent } from './Components/VariantSection/variants/variants.component';
