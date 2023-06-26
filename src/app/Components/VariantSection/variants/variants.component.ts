@@ -71,4 +71,9 @@ export class VariantsComponent implements OnInit {
   addVariant() {
     this.router.navigate(['/addvariant']);
   }
+
+  editVariant(variantId: any) {
+    this.router.navigate(['/variants/edit/' + variantId]);
+  }
+  deleteVariant() {}
 }

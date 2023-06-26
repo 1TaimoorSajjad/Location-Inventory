@@ -7,9 +7,10 @@ import {
   getDocs,
   getDoc,
   doc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-addvariant',
@@ -18,16 +19,18 @@ import { Router } from '@angular/router';
 })
 export class AddvariantComponent implements OnInit {
   variantForm!: FormGroup;
-  collectionRef;
+  variantcollectionRef;
   items: any[] = [];
   locations: any[] = [];
+  documentId: string = '';
 
   constructor(
     private router: Router,
     private firestore: Firestore,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {
-    this.collectionRef = collection(this.firestore, 'variants');
+    this.variantcollectionRef = collection(this.firestore, 'variants');
   }
 
   ngOnInit(): void {
@@ -38,6 +41,31 @@ export class AddvariantComponent implements OnInit {
     });
 
     this.fetchItems();
+    this.route.params.subscribe((params) => {
+      const userId = params['id'];
+      if (userId) {
+        this.documentId = userId;
+        this.populateFormWithId(userId);
+      }
+    });
+  }
+
+  populateFormWithId(id: string) {
+    const docRef = doc(this.variantcollectionRef, id);
+
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const formData = docSnap.data();
+          formData.documentId = id;
+          this.variantForm.patchValue(formData);
+        } else {
+          console.log('Document does not exist');
+        }
+      })
+      .catch((error: any) => {
+        console.log('Error retrieving document:', error);
+      });
   }
 
   fetchItems() {
@@ -64,13 +92,27 @@ export class AddvariantComponent implements OnInit {
 
   onSubmit() {
     const formData = this.variantForm.value;
-    addDoc(this.collectionRef, formData)
-      .then(() => {
-        console.log('Variant added to the database');
-        this.router.navigate(['/variants']);
-      })
-      .catch((error) => {
-        console.log('Error sending data to the database', error);
-      });
+
+    if (formData.documentId) {
+      const documentId = formData.documentId;
+      delete formData.documentId;
+      updateDoc(doc(this.variantcollectionRef, documentId), formData)
+        .then(() => {
+          console.log('Form data updated in Firestore');
+          this.router.navigate(['/variants']);
+        })
+        .catch((error: any) => {
+          console.log('Error updating form data in Firestore:', error);
+        });
+    } else {
+      addDoc(this.variantcollectionRef, formData)
+        .then(() => {
+          console.log('Item added in the table');
+          this.router.navigate(['/variants']);
+        })
+        .catch((error) => {
+          console.log('Error sending the data to the database', error);
+        });
+    }
   }
 }
