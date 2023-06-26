@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  CollectionReference,
+  DocumentData,
   Firestore,
   addDoc,
   collection,
@@ -7,9 +9,11 @@ import {
   getDoc,
   getDocs,
   query,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-addlocation',
@@ -21,12 +25,14 @@ export class AddlocationComponent implements OnInit {
   items: any[] = [];
   variants: any[] = [];
   locations: any[] = [];
-  collectionRef;
+  collectionRef: CollectionReference<DocumentData>;
+  editLocationId: string | null = null;
 
   constructor(
     private firestore: Firestore,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.collectionRef = collection(this.firestore, 'locations');
   }
@@ -42,6 +48,36 @@ export class AddlocationComponent implements OnInit {
 
     this.fetchItems();
     this.fetchVariants();
+    this.editLocationId = this.route.snapshot.paramMap.get('id');
+    if (this.editLocationId) {
+      this.fetchLocationData();
+    }
+  }
+
+  fetchLocationData() {
+    const locationDocRef = doc(this.collectionRef, this.editLocationId!);
+    getDoc(locationDocRef)
+      .then((locationDoc) => {
+        if (locationDoc.exists()) {
+          const locationData = locationDoc.data();
+          this.locationForm.patchValue(locationData);
+          // Patch the variants data
+          const variantsData = locationData.variants || [];
+          const variantControls = this.getVariants();
+          variantControls.clear();
+          for (const variant of variantsData) {
+            variantControls.push(
+              this.fb.group({
+                variant: [variant.variant],
+                quantity: [variant.quantity],
+              })
+            );
+          }
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching location data: ', error);
+      });
   }
 
   getVariants() {
@@ -56,37 +92,48 @@ export class AddlocationComponent implements OnInit {
     this.getVariants().push(variantFormGroup);
   }
 
-  async fetchItems() {
+  fetchItems() {
     const itemsRef = collection(this.firestore, 'items');
     const q = query(itemsRef);
 
-    const querySnapshot = await getDocs(q);
+    getDocs(q)
+      .then((querySnapshot) => {
+        const promises = querySnapshot.docs.map((doc) => {
+          const itemData = doc.data();
+          const itemId = doc.id;
+          const locationId = itemData.location;
 
-    const promises = querySnapshot.docs.map(async (doc) => {
-      const itemData = doc.data();
-      const itemId = doc.id;
-      const locationId = itemData.location;
+          const locationName = locationId
+            ? this.getLocationName(locationId)
+            : '';
 
-      const locationName = locationId
-        ? await this.getLocationName(locationId)
-        : '';
+          return { id: itemId, ...itemData, locationName };
+        });
 
-      return { id: itemId, ...itemData, locationName };
-    });
-
-    this.items = await Promise.all(promises);
+        return Promise.all(promises);
+      })
+      .then((items) => {
+        this.items = items;
+      })
+      .catch((error) => {
+        console.error('Error fetching items: ', error);
+      });
   }
 
-  async getLocationName(locationId: string): Promise<string> {
+  getLocationName(locationId: string): Promise<string> {
     const locationDocRef = doc(this.firestore, 'locations', locationId);
-    const locationDoc = await getDoc(locationDocRef);
-
-    if (locationDoc.exists()) {
-      const locationData = locationDoc.data();
-      return locationData.locationName;
-    }
-
-    return '';
+    return getDoc(locationDocRef)
+      .then((locationDoc) => {
+        if (locationDoc.exists()) {
+          const locationData = locationDoc.data();
+          return locationData.locationName;
+        }
+        return '';
+      })
+      .catch((error) => {
+        console.error('Error fetching location name: ', error);
+        return '';
+      });
   }
 
   fetchVariants() {
@@ -107,13 +154,28 @@ export class AddlocationComponent implements OnInit {
 
   onSubmit() {
     const formData = this.locationForm.value;
-    addDoc(this.collectionRef, formData)
-      .then(() => {
-        console.log('Location data added successfully');
-        this.router.navigate(['/locations']);
-      })
-      .catch((error: any) => {
-        console.log('Error sending data to Firestore', error);
-      });
+
+    if (this.editLocationId) {
+      // Update the existing location
+      const locationDocRef = doc(this.collectionRef, this.editLocationId);
+      updateDoc(locationDocRef, formData)
+        .then(() => {
+          console.log('Location data updated successfully');
+          this.router.navigate(['/add-location']);
+        })
+        .catch((error: any) => {
+          console.log('Error updating data in Firestore', error);
+        });
+    } else {
+      // Create a new location
+      addDoc(this.collectionRef, formData)
+        .then(() => {
+          console.log('Location data added successfully');
+          this.router.navigate(['/add-location']);
+        })
+        .catch((error: any) => {
+          console.log('Error sending data to Firestore', error);
+        });
+    }
   }
 }
