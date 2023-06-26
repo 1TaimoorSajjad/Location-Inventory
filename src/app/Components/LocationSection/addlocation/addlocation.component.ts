@@ -23,7 +23,8 @@ export class AddlocationComponent implements OnInit {
   items: any[] = [];
   variants: any[] = [];
   locations: any[] = [];
-  collectionRef;
+  locationcollectionRef;
+  documentId: string = '';
 
   constructor(
     private firestore: Firestore,
@@ -31,7 +32,7 @@ export class AddlocationComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute
   ) {
-    this.collectionRef = collection(this.firestore, 'locations');
+    this.locationcollectionRef = collection(this.firestore, 'locations');
   }
 
   ngOnInit(): void {
@@ -45,8 +46,32 @@ export class AddlocationComponent implements OnInit {
 
     this.fetchItems();
     this.fetchVariants();
+    this.route.params.subscribe((params) => {
+      const userId = params['id'];
+      if (userId) {
+        this.documentId = userId;
+        this.populateFormWithId(userId);
+      }
+    });
   }
 
+  populateFormWithId(id: string) {
+    const docRef = doc(this.locationcollectionRef, id);
+
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const formData = docSnap.data();
+          formData.documentId = id;
+          this.locationForm.patchValue(formData);
+        } else {
+          console.log('Document does not exist');
+        }
+      })
+      .catch((error: any) => {
+        console.log('Error retrieving document:', error);
+      });
+  }
   getVariants() {
     return this.locationForm.get('variants') as FormArray;
   }
@@ -121,13 +146,27 @@ export class AddlocationComponent implements OnInit {
 
   onSubmit() {
     const formData = this.locationForm.value;
-    addDoc(this.collectionRef, formData)
-      .then(() => {
-        console.log('Location data added successfully');
-        this.router.navigate(['/add-location']);
-      })
-      .catch((error: any) => {
-        console.log('Error sending data to Firestore', error);
-      });
+
+    if (formData.documentId) {
+      const documentId = formData.documentId;
+      delete formData.documentId;
+      updateDoc(doc(this.locationcollectionRef, documentId), formData)
+        .then(() => {
+          console.log('Form data updated in Firestore');
+          this.router.navigate(['/locations']);
+        })
+        .catch((error: any) => {
+          console.log('Error updating form data in Firestore:', error);
+        });
+    } else {
+      addDoc(this.locationcollectionRef, formData)
+        .then(() => {
+          console.log('Item added in the table');
+          this.router.navigate(['/locations']);
+        })
+        .catch((error) => {
+          console.log('Error sending the data to the database', error);
+        });
+    }
   }
 }

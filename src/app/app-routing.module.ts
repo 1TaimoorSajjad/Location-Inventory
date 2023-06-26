@@ -18,6 +18,8 @@ const routes: Routes = [
     component: RegistrationComponent,
   },
   { path: 'items/edit/:id', component: AdditemComponent },
+  { path: 'locations/edit/:id', component: LocationsComponent },
+  { path: 'variants/edit/:id', component: VariantsComponent },
   {
     path: '',
     component: LoginComponent,

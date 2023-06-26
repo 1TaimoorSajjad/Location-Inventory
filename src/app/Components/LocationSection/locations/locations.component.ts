@@ -17,23 +17,23 @@ import { Router } from '@angular/router';
 })
 export class LocationsComponent implements OnInit {
   locations: any[] = [];
+  locationsCollectionRef;
 
-  constructor(private firestore: Firestore, private router: Router) {}
+  constructor(private firestore: Firestore, private router: Router) {
+    this.locationsCollectionRef = collection(this.firestore, 'locations');
+  }
 
   ngOnInit(): void {
     this.getLocations();
   }
 
   getLocations() {
-    const locationsCollection = collection(this.firestore, 'locations');
-    const locationsQuery = query(locationsCollection);
+    const locationsQuery = query(this.locationsCollectionRef);
     getDocs(locationsQuery)
       .then((locationsSnapshot) => {
         const locationsData = [];
         for (const docSnap of locationsSnapshot.docs) {
           const locationData = docSnap.data();
-          console.log(locationData, 'mojojo');
-          console.log(locationData.variants, 'location ka data');
           for (let variantsData of locationData.variants) {
             if (variantsData && typeof variantsData.variant === 'string') {
               this.getVariantData(variantsData.variant)
@@ -76,10 +76,9 @@ export class LocationsComponent implements OnInit {
     this.router.navigate(['/addlocation']);
   }
 
-  editUser(id: string) {
-    if (id) {
-      this.router.navigate(['/addlocation/edit', id]);
-    }
+  editLocation(locationId: string) {
+    console.log('location id', locationId);
+    this.router.navigate(['/locations/edit/' + locationId]);
   }
 
   deleteUser(id: string) {

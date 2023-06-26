@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Firestore,
-  collection,
-  query,
-  getDocs,
-  where,
-  doc,
-  getDoc,
-} from '@angular/fire/firestore';
+import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -52,8 +44,6 @@ export class ItemsComponent implements OnInit {
   }
 
   editItem(itemId: string) {
-    console.log('ds', itemId);
-
     this.router.navigate(['/items/edit/' + itemId]);
   }
 
