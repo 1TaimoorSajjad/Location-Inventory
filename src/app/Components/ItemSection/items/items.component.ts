@@ -50,4 +50,7 @@ export class ItemsComponent implements OnInit {
   addItem() {
     this.router.navigate(['/additem']);
   }
+
+  editItem() {}
+  deleteItem() {}
 }
