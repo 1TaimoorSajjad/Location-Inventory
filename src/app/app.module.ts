@@ -11,17 +11,17 @@ import { AppComponent } from './app.component';
 import { FeedComponent } from './Components/feed/feed.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReversePipe } from './Pipes/reverse.pipe';
-import { AdditemComponent } from './Forms/additem/additem.component';
-import { AddlocationComponent } from './Forms/addlocation/addlocation.component';
-import { AddvariantComponent } from './Forms/addvariant/addvariant.component';
+import { AddvariantComponent } from './Components/VariantSection/addvariant/addvariant.component';
 import { SidenavComponent } from './Components/Common/sidenav/sidenav.component';
-import { LocationsComponent } from './Components/locations/locations.component';
-import { ItemsComponent } from './Components/items/items.component';
-import { VariantsComponent } from './Components/variants/variants.component';
-import { UsersComponent } from './Components/users/users.component';
+import { ItemsComponent } from './Components/ItemSection/items/items.component';
+import { VariantsComponent } from './Components/VariantSection/variants/variants.component';
+import { UsersComponent } from './Auth/users/users.component';
 import { RegistrationComponent } from './Auth/registration/registration.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { TransferComponent } from './Components/transfer/transfer.component';
+import { AdditemComponent } from './Components/ItemSection/additem/additem.component';
+import { AddlocationComponent } from './Components/LocationSection/addlocation/addlocation.component';
+import { LocationsComponent } from './Components/LocationSection/locations/locations.component';
 
 @NgModule({
   declarations: [
