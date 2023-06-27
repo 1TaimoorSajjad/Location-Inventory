@@ -11,6 +11,7 @@ import { RegistrationComponent } from './Auth/registration/registration.componen
 import { TransferComponent } from './Components/transfer/transfer.component';
 import { AddlocationComponent } from './Components/LocationSection/addlocation/addlocation.component';
 import { LocationsComponent } from './Components/LocationSection/locations/locations.component';
+import { RegisteredusersComponent } from './Auth/registeredusers/registeredusers.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   { path: 'items/edit/:id', component: AdditemComponent },
   { path: 'locations/edit/:id', component: AddlocationComponent },
   { path: 'variants/edit/:id', component: AddvariantComponent },
+  {
+    path: 'registeredusers',
+    component: RegisteredusersComponent,
+  },
   {
     path: '',
     component: LoginComponent,

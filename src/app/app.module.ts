@@ -22,6 +22,7 @@ import { TransferComponent } from './Components/transfer/transfer.component';
 import { AdditemComponent } from './Components/ItemSection/additem/additem.component';
 import { AddlocationComponent } from './Components/LocationSection/addlocation/addlocation.component';
 import { LocationsComponent } from './Components/LocationSection/locations/locations.component';
+import { RegisteredusersComponent } from './Auth/registeredusers/registeredusers.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LocationsComponent } from './Components/LocationSection/locations/locat
     RegistrationComponent,
     LoginComponent,
     TransferComponent,
+    RegisteredusersComponent,
   ],
   imports: [
     BrowserModule,
