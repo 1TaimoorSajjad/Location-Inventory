@@ -79,6 +79,7 @@ export class TransferComponent implements OnInit {
     const selectedLocation = this.locations.find(
       (location) => location.id === selectedLocationId
     );
+    //new comment
 
     if (selectedLocation) {
       this.variants = selectedLocation.variants;
