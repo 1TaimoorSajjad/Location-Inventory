@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
 import {
-  FormGroup,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+  Firestore,
+  collection,
+  query,
+  getDocs,
+  doc,
+  DocumentReference,
+  CollectionReference,
+  updateDoc,
+} from '@angular/fire/firestore';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-transfer',
@@ -92,5 +95,90 @@ export class TransferComponent implements OnInit {
       });
     }
   }
-  transferVariant() {}
+  transferVariant() {
+    const formData = this.registerForm.value;
+
+    const locationFrom = formData.locationFrom;
+    const locationTo = formData.locationTo;
+
+    const fromLocation = this.locations.find(
+      (location) => location.id === locationFrom
+    );
+    const toLocation = this.locations.find(
+      (location) => location.id === locationTo
+    );
+
+    if (fromLocation && toLocation) {
+      const variants = formData.variants;
+
+      variants.forEach((variant: any) => {
+        if (variant.selected) {
+          const quantity = parseInt(variant.quantity, 10);
+
+          const fromVariants = fromLocation.variants.reduce(
+            (
+              acc: { [x: string]: any },
+              fromVariant: { variant: string | number; quantity: any }
+            ) => {
+              acc[fromVariant.variant] = fromVariant.quantity;
+              return acc;
+            },
+            {}
+          );
+
+          const toVariants = toLocation.variants.reduce(
+            (
+              acc: { [x: string]: any },
+              toVariant: { variant: string | number; quantity: any }
+            ) => {
+              acc[toVariant.variant] = toVariant.quantity;
+              return acc;
+            },
+            {}
+          );
+
+          if (fromVariants[variant.variant]) {
+            fromVariants[variant.variant] -= quantity;
+          }
+
+          toVariants[variant.variant] =
+            (toVariants[variant.variant] || 0) + quantity;
+
+          fromLocation.variants = fromLocation.variants.map(
+            (fromVariant: { variant: any; quantity: any }) => {
+              if (fromVariant.variant === variant.variant) {
+                fromVariant.quantity = fromVariants[variant.variant];
+              }
+              return fromVariant;
+            }
+          );
+
+          const updatedToVariants = Object.keys(toVariants).map((variant) => ({
+            variant,
+            quantity: toVariants[variant],
+          }));
+
+          toLocation.variants = updatedToVariants;
+        }
+      });
+
+      updateDoc(doc(this.firestore, 'locations', fromLocation.id), {
+        variants: fromLocation.variants,
+      })
+        .then(() => {
+          updateDoc(doc(this.firestore, 'locations', toLocation.id), {
+            variants: toLocation.variants,
+          })
+            .then(() => {
+              console.log('Transfer successful!');
+            })
+            .catch((error) => {
+              console.error('Error updating destination location: ', error);
+            });
+        })
+        .catch((error) => {
+          console.error('Error updating source location: ', error);
+        });
+    }
+  }
 }
