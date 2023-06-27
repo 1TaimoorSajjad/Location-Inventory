@@ -7,6 +7,7 @@ import {
   where,
   doc,
   getDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -82,5 +83,16 @@ export class VariantsComponent implements OnInit {
     console.log('id', variantId);
     this.router.navigate(['/variants/edit/' + variantId]);
   }
-  deleteVariant() {}
+  deleteVariant(id: string) {
+    if (id) {
+      const documentRef = doc(this.firestore, 'variants', id);
+      deleteDoc(documentRef)
+        .then(() => {
+          console.log('Document deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting document: ', error);
+        });
+    }
+  }
 }

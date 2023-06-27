@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, query, getDocs } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  query,
+  getDocs,
+  doc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -47,5 +54,16 @@ export class ItemsComponent implements OnInit {
     this.router.navigate(['/items/edit/' + itemId]);
   }
 
-  deleteItem() {}
+  deleteItem(id: string) {
+    if (id) {
+      const documentRef = doc(this.firestore, 'items', id);
+      deleteDoc(documentRef)
+        .then(() => {
+          console.log('Document deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting document: ', error);
+        });
+    }
+  }
 }
