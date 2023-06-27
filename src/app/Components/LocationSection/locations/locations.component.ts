@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class LocationsComponent implements OnInit {
   locations: any[] = [];
+  filteredLocations: any[] = [];
   locationsCollectionRef;
   selectedLocationId: string = '';
 
@@ -62,6 +63,7 @@ export class LocationsComponent implements OnInit {
           locationsData.push(locationData);
         }
         this.locations = locationsData;
+        this.filteredLocations = locationsData;
       })
       .catch((error) => {
         console.error('Error fetching locations: ', error);
@@ -103,6 +105,16 @@ export class LocationsComponent implements OnInit {
         .catch((error) => {
           console.error('Error deleting document: ', error);
         });
+    }
+  }
+
+  filterLocations() {
+    if (this.selectedLocationId) {
+      this.filteredLocations = this.locations.filter(
+        (location) => location.id === this.selectedLocationId
+      );
+    } else {
+      this.filteredLocations = this.locations;
     }
   }
 }
