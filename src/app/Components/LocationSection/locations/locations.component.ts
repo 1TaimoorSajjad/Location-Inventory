@@ -3,6 +3,7 @@ import {
   Firestore,
   collection,
   query,
+  where,
   getDocs,
   doc,
   getDoc,
@@ -18,6 +19,7 @@ import { Router } from '@angular/router';
 export class LocationsComponent implements OnInit {
   locations: any[] = [];
   locationsCollectionRef;
+  selectedLocationId: string = '';
 
   constructor(private firestore: Firestore, private router: Router) {
     this.locationsCollectionRef = collection(this.firestore, 'locations');
@@ -28,14 +30,20 @@ export class LocationsComponent implements OnInit {
   }
 
   getLocations() {
-    const locationsQuery = query(this.locationsCollectionRef);
+    let locationsQuery = query(this.locationsCollectionRef);
+    if (this.selectedLocationId) {
+      locationsQuery = query(
+        this.locationsCollectionRef,
+        where('id', '==', this.selectedLocationId)
+      );
+    }
+
     getDocs(locationsQuery)
       .then((locationsSnapshot) => {
         const locationsData = [];
         for (const docSnap of locationsSnapshot.docs) {
           const locationData = docSnap.data();
-          const locationId = docSnap.id; // Get the document ID
-
+          const locationId = docSnap.id;
           for (let variantsData of locationData.variants) {
             if (variantsData && typeof variantsData.variant === 'string') {
               this.getVariantData(variantsData.variant)
@@ -49,7 +57,7 @@ export class LocationsComponent implements OnInit {
                 });
             }
           }
-          locationData.id = locationId; // Add the id property with the document ID
+          locationData.id = locationId;
 
           locationsData.push(locationData);
         }
