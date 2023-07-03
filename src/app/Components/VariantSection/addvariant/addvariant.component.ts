@@ -8,6 +8,7 @@ import {
   getDoc,
   doc,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +25,10 @@ export class AddvariantComponent implements OnInit {
   items: any[] = [];
   locations: any[] = [];
   documentId: string = '';
+  filteredLocations: any[] = [];
+
   locationcollectionRef;
+  selectedLocationId: any;
   constructor(
     private router: Router,
     private firestore: Firestore,
@@ -42,7 +46,6 @@ export class AddvariantComponent implements OnInit {
       quantity: [''],
       location: [''],
     });
-
     this.fetchItems();
     this.getLocations();
 
@@ -128,7 +131,10 @@ export class AddvariantComponent implements OnInit {
           console.log('Error updating form data in Firestore:', error);
         });
     } else {
-      addDoc(this.variantcollectionRef, formData.variant && formData.item)
+      addDoc(this.variantcollectionRef, {
+        variantName: formData.variantName,
+        item: formData.item,
+      })
         .then(() => {
           console.log('Item added in the table');
           Swal.fire({
@@ -142,19 +148,39 @@ export class AddvariantComponent implements OnInit {
           console.log('Error sending the data to the database', error);
         });
       // Below query is going to the location collection
-      addDoc(this.locationcollectionRef, formData.location && formData.quantity)
-        .then(() => {
-          console.log('Item added in the table');
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Variant Added Successfully!',
-          });
-          this.router.navigate(['/variants']);
-        })
-        .catch((error) => {
-          console.log('Error sending the data to the database', error);
-        });
+      // addDoc(this.locationcollectionRef, {
+      //   locationName: formData.location,
+      //   quantity: formData.quantity,
+      // });
+      let locationsQuery = query(this.locationcollectionRef);
+      console.log('query', locationsQuery);
+
+      if (this.selectedLocationId) {
+        locationsQuery = query(
+          this.locationcollectionRef,
+          where('id', '==', this.selectedLocationId)
+        );
+        console.log('id comparison query', locationsQuery);
+      }
+      if (locationsQuery) {
+        let variantsQuery = query(this.locationcollectionRef);
+        console.log('query', variantsQuery);
+
+        variantsQuery = query(
+          this.locationcollectionRef,
+          where('variantName', '==', variantsQuery)
+        );
+        console.log('variants query', this.locationcollectionRef);
+      }
+    }
+  }
+  filterLocations() {
+    if (this.selectedLocationId) {
+      this.filteredLocations = this.locations.filter(
+        (location) => location.id === this.selectedLocationId
+      );
+    } else {
+      this.filteredLocations = this.locations;
     }
   }
 }
