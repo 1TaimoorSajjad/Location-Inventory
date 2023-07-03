@@ -40,6 +40,7 @@ export class AddvariantComponent implements OnInit {
       variantName: [''],
       item: [''],
       quantity: [''],
+      location: [''],
     });
 
     this.fetchItems();
@@ -127,7 +128,21 @@ export class AddvariantComponent implements OnInit {
           console.log('Error updating form data in Firestore:', error);
         });
     } else {
-      addDoc(this.variantcollectionRef, formData)
+      addDoc(this.variantcollectionRef, formData.variant && formData.item)
+        .then(() => {
+          console.log('Item added in the table');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Variant Added Successfully!',
+          });
+          this.router.navigate(['/variants']);
+        })
+        .catch((error) => {
+          console.log('Error sending the data to the database', error);
+        });
+      // Below query is going to the location collection
+      addDoc(this.locationcollectionRef, formData.location && formData.quantity)
         .then(() => {
           console.log('Item added in the table');
           Swal.fire({
