@@ -171,29 +171,30 @@ export class AddvariantComponent implements OnInit {
         getDocs(variantsQuery).then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             const variants = doc.data().variants;
-            const quantity = formData.quantity;
-
             console.log('variants:', variants);
           });
-
-          updateDoc(doc(this.locationcollectionRef, this.documentId), {
-            variants: arrayUnion({
-              variant: formData.variant,
-              quantity: formData.quantity,
-            }),
-          })
-            .then(() => {
-              console.log('Form data updated in Firestore');
-              Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Variant Updated Successfully!',
-              });
-              this.router.navigate(['/variants']);
+          if (formData.documentId) {
+            const documentId = formData.documentId;
+            delete formData.documentId;
+            updateDoc(doc(this.locationcollectionRef, documentId), {
+              variants: arrayUnion({
+                variant: formData.variant,
+                quantity: formData.quantity,
+              }),
             })
-            .catch((error: any) => {
-              console.log('Error updating form data in Firestore:', error);
-            });
+              .then(() => {
+                console.log('Form data updated in Firestore');
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Success',
+                  text: 'Variant Updated Successfully!',
+                });
+                this.router.navigate(['/variants']);
+              })
+              .catch((error: any) => {
+                console.log('Error updating form data in Firestore:', error);
+              });
+          }
         });
       }
     }
