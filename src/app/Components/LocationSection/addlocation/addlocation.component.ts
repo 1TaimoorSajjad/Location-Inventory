@@ -12,6 +12,7 @@ import {
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addlocation',
@@ -153,6 +154,11 @@ export class AddlocationComponent implements OnInit {
       updateDoc(doc(this.locationcollectionRef, documentId), formData)
         .then(() => {
           console.log('Form data updated in Firestore');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Location Updated Successfully!',
+          });
           this.router.navigate(['/locations']);
         })
         .catch((error: any) => {
@@ -162,6 +168,11 @@ export class AddlocationComponent implements OnInit {
       addDoc(this.locationcollectionRef, formData)
         .then(() => {
           console.log('Item added in the table');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Location Added Successfully!',
+          });
           this.router.navigate(['/locations']);
         })
         .catch((error) => {

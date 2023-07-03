@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addvariant',
@@ -115,6 +116,11 @@ export class AddvariantComponent implements OnInit {
       updateDoc(doc(this.variantcollectionRef, documentId), formData)
         .then(() => {
           console.log('Form data updated in Firestore');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Variant Updated Successfully!',
+          });
           this.router.navigate(['/variants']);
         })
         .catch((error: any) => {
@@ -124,6 +130,11 @@ export class AddvariantComponent implements OnInit {
       addDoc(this.variantcollectionRef, formData)
         .then(() => {
           console.log('Item added in the table');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Variant Added Successfully!',
+          });
           this.router.navigate(['/variants']);
         })
         .catch((error) => {

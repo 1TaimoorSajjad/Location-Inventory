@@ -12,6 +12,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { updateDoc } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-additem',
@@ -71,6 +72,11 @@ export class AdditemComponent implements OnInit {
       updateDoc(doc(this.itemcollectionRef, documentId), formData)
         .then(() => {
           console.log('Form data updated in Firestore');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Item Updated Successfully!',
+          });
           this.router.navigate(['/items']);
         })
         .catch((error: any) => {
@@ -80,6 +86,11 @@ export class AdditemComponent implements OnInit {
       addDoc(this.itemcollectionRef, formData)
         .then(() => {
           console.log('Item added in the table');
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Item Added Successfully!',
+          });
           this.router.navigate(['/items']);
         })
         .catch((error) => {

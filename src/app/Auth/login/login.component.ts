@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore, collection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +29,15 @@ export class LoginComponent implements OnInit {
       .then(() => {
         console.log('Login successful');
         console.log('Current user:', this.auth.currentUser);
+
         this.router.navigate(['/dashboard']);
       })
       .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Warning',
+          text: 'Invalid Username or Password!',
+        });
         console.log('Error logging in:', error);
       });
   }
