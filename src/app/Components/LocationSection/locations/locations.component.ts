@@ -21,6 +21,7 @@ export class LocationsComponent implements OnInit {
   filteredLocations: any[] = [];
   locationsCollectionRef;
   selectedLocationId: string = '';
+  showTable: boolean = false;
 
   constructor(private firestore: Firestore, private router: Router) {
     this.locationsCollectionRef = collection(this.firestore, 'locations');

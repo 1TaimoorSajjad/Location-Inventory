@@ -1,13 +1,11 @@
 <div class="px-4 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">Locations</h1>
-    </div>
+    <div class="sm:flex-auto"></div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center">
       <select
         class="border border-gray-300 rounded mt-2 w-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         [(ngModel)]="selectedLocationId"
-        (change)="filterLocations()"
+        (change)="filterLocations(); showTable = true"
       >
         <option value="">Select a location</option>
         <option *ngFor="let location of locations" [value]="location.id">
@@ -23,7 +21,7 @@
       </button>
     </div>
   </div>
-  <div class="mt-8 flow-root">
+  <div class="mt-8 flow-root" *ngIf="showTable">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <table class="min-w-full divide-y divide-gray-300">
@@ -138,4 +136,239 @@
       </div>
     </div>
   </div>
+  <div *ngIf="!showTable">
+    <div
+      class="relative block w-full rounded-lg border-2 mt-2 border-dashed border-main-base p-12 text-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="mx-auto h-12 w-12 text-main-light"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3 8.25V18a2.25 2.25 0 002.25 2.25h13.5A2.25 2.25 0 0021 18V8.25m-18 0V6a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6zM7.5 6h.008v.008H7.5V6zm2.25 0h.008v.008H9.75V6z"
+        />
+      </svg>
+      <span class="mt-2 block font-medium text-main-dark"
+        >No Location Selected</span
+      >
+    </div>
+  </div>
 </div>
+<!-- <div class="px-4 sm:px-6 lg:px-8 py-4">
+  <div
+    class="flex flex-wrap justify-between items-center gap-4"
+    *ngIf="locations"
+  ></div>
+  <div
+    class="flex flex-col gap-4 mt-8"
+    *ngFor="let location of filteredLocations"
+  >
+    <details
+      *ngIf="location.locationName && location.createdAt"
+      class="card bg-main-base-100 flex flex-col overflow-hidden"
+    >
+      <summary
+        class="-m-4 sm:-m-6 p-4 sm:p-6 flex flex-wrap gap-4 justify-between items-center cursor-pointer"
+      >
+        <div class="flex items-center gap-4 md:divide-x-2 divide-main-base">
+          <div class="flex items-start gap-2">
+            <div class="text-main-primary hidden md:block">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <div class="text-sm font-bold text-main-dark">
+                {{ location.locationName }}
+                <span class="text-main-light md:hidden font-normal"
+                  >( {{ location.createdAt }} )</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="md:flex items-start gap-2 pl-4 hidden">
+            <div class="text-main-primary hidden md:block">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="md:flex items-start gap-2 pl-4 hidden">
+            <div class="text-main-primary hidden md:block">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                viewBox="0 0 100 100"
+              >
+                <path
+                  id="gisRoute0"
+                  fill="currentColor"
+                  stroke-width="2.556"
+                  d="M21 32C9.459 32 0 41.43 0 52.94c0 4.46 1.424 8.605 3.835 12.012l14.603 25.244c2.045 2.672 3.405 2.165 5.106-.14l16.106-27.41c.325-.59.58-1.216.803-1.856A20.668 20.668 0 0 0 42 52.94C42 41.43 32.544 32 21 32Zm0 9.812c6.216 0 11.16 4.931 11.16 11.129c0 6.198-4.944 11.127-11.16 11.127c-6.215 0-11.16-4.93-11.16-11.127c0-6.198 4.945-11.129 11.16-11.129z"
+                />
+                <path
+                  id="gisRoute1"
+                  fill="currentColor"
+                  stroke-width="1.491"
+                  d="M87.75 0C81.018 0 75.5 5.501 75.5 12.216c0 2.601.83 5.019 2.237 7.006l8.519 14.726c1.193 1.558 1.986 1.262 2.978-.082l9.395-15.99c.19-.343.339-.708.468-1.082a12.05 12.05 0 0 0 .903-4.578C100 5.5 94.484 0 87.75 0Zm0 5.724c3.626 0 6.51 2.876 6.51 6.492c0 3.615-2.884 6.49-6.51 6.49c-3.625 0-6.51-2.875-6.51-6.49c0-3.616 2.885-6.492 6.51-6.492z"
+                />
+                <path
+                  id="gisRoute2"
+                  fill="currentColor"
+                  fill-opacity="1"
+                  fill-rule="evenodd"
+                  stroke="none"
+                  stroke-dasharray="10.655 5.328"
+                  stroke-dashoffset="52.211"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  stroke-miterlimit="4"
+                  stroke-opacity="1"
+                  stroke-width="5.328"
+                  d="M88.209 37.412c-2.247.05-4.5.145-6.757.312l.348 5.532a126.32 126.32 0 0 1 6.513-.303zm-11.975.82c-3.47.431-6.97 1.045-10.43 2.032l1.303 5.361c3.144-.896 6.402-1.475 9.711-1.886zM60.623 42.12a24.52 24.52 0 0 0-3.004 1.583l-.004.005l-.006.002c-1.375.866-2.824 1.965-4.007 3.562c-.857 1.157-1.558 2.62-1.722 4.35l5.095.565c.038-.406.246-.942.62-1.446h.002v-.002c.603-.816 1.507-1.557 2.582-2.235l.004-.002a19.64 19.64 0 0 1 2.388-1.256zM58 54.655l-3.303 4.235c.783.716 1.604 1.266 2.397 1.726l.01.005l.01.006c2.632 1.497 5.346 2.342 7.862 3.144l1.446-5.318c-2.515-.802-4.886-1.576-6.918-2.73c-.582-.338-1.092-.691-1.504-1.068Zm13.335 5.294l-1.412 5.327l.668.208l.82.262c2.714.883 5.314 1.826 7.638 3.131l2.358-4.92c-2.81-1.579-5.727-2.611-8.538-3.525l-.008-.002l-.842-.269zm14.867 7.7l-3.623 3.92c.856.927 1.497 2.042 1.809 3.194l.002.006l.002.009c.372 1.345.373 2.927.082 4.525l5.024 1.072c.41-2.256.476-4.733-.198-7.178c-.587-2.162-1.707-4.04-3.098-5.548zM82.72 82.643a11.84 11.84 0 0 1-1.826 1.572h-.002c-1.8 1.266-3.888 2.22-6.106 3.04l1.654 5.244c2.426-.897 4.917-1.997 7.245-3.635l.006-.005l.003-.002a16.95 16.95 0 0 0 2.639-2.287zm-12.64 6.089c-3.213.864-6.497 1.522-9.821 2.08l.784 5.479c3.421-.575 6.856-1.262 10.27-2.18zm-14.822 2.836c-3.346.457-6.71.83-10.084 1.148l.442 5.522c3.426-.322 6.858-.701 10.285-1.17zm-15.155 1.583c-3.381.268-6.77.486-10.162.67l.256 5.536c3.425-.185 6.853-.406 10.28-.678zm-15.259.92c-2.033.095-4.071.173-6.114.245l.168 5.541a560.1 560.1 0 0 0 6.166-.246z"
+                  color="currentColor"
+                  color-interpolation="sRGB"
+                  color-rendering="auto"
+                  display="inline"
+                  opacity="1"
+                  vector-effect="none"
+                  visibility="visible"
+                />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <div class="text-sm font-bold text-main-dark">
+                {{ location.createdBy }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="lg:flex items-start gap-2 hidden">
+            <div class="text-main-primary hidden md:block">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <button
+              class="btn-white"
+              data-toggle="modal"
+              data-target="#cancelReasonModal"
+            >
+              Archive All
+            </button>
+          </div>
+          <div>
+            <button
+              class="btn-danger"
+              data-toggle="modal"
+              data-target="#cancelReasonModal"
+            >
+              Cancel All
+            </button>
+          </div>
+        </div>
+      </summary>
+      <div class="flex flex-col mt-4">
+        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div
+            class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8"
+          >
+            <div
+              class="overflow-hidden shadow ring-1 ring-main-base md:rounded-lg"
+            >
+              <table class="min-w-full divide-y divide-main-base">
+                <thead class="bg-main-base-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="py-3.5 pl-4 pr-3 sticky top-0 z-10 text-left text-xs font-semibold text-main-dark sm:pl-6"
+                    >
+                      Variant
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-xs font-semibold text-main-dark"
+                    >
+                      Quantity
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-main-base bg-white">
+                  <tr *ngFor="let variant of location.variants">
+                    <td
+                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                    >
+                      {{ variant.variant }}
+                    </td>
+                    <td
+                      class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                    >
+                      {{ variant.quantity }}
+                    </td>
+
+                    <td
+                      class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                    >
+                      <div
+                        class="flex justify-end divide-x items-center divide-main-base"
+                      >
+                        <button class="mr-2 btn-primary">Edit</button>
+                        <button class="mr-2 btn-white">Archive</button>
+                        <button class="btn-danger">Cancel</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+</div> -->
