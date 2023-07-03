@@ -91,6 +91,10 @@ export class LocationsComponent implements OnInit {
     this.router.navigate(['/addlocation']);
   }
 
+  transfer() {
+    this.router.navigate(['/transfer']);
+  }
+
   editLocation(locationId: string) {
     console.log('location id', locationId);
     this.router.navigate(['/locations/edit/' + locationId]);

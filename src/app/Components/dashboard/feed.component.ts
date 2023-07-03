@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Firestore, collection, getDocs, query } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,39 +8,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
-  constructor(private router: Router) {}
+  variantCollectionRef;
+  locationCollectionRef;
+  itemCollectionRef;
+  variants!: any[];
+  locations!: any[];
+  items!: any[];
+
+  constructor(private router: Router, private firestore: Firestore) {
+    this.variantCollectionRef = collection(this.firestore, 'variants');
+    this.locationCollectionRef = collection(this.firestore, 'locations');
+    this.itemCollectionRef = collection(this.firestore, 'items');
+  }
+
   isModalOpen: boolean = false;
 
-  variants: string[] = ['Variant 1', 'Variant 2', 'Variant 3'];
+  ngOnInit(): void {
+    this.fetchVariants();
+    this.fetchLocations();
+    this.fetchItems();
+  }
 
-  locations: string[] = ['Location 1', 'Location 2', 'Location 3'];
+  fetchVariants() {
+    getDocs(this.variantCollectionRef)
+      .then((snapshot) => {
+        this.variants = snapshot.docs.map((doc) => doc.data());
+      })
+      .catch((error) => {
+        console.error('Error fetching variants:', error);
+      });
+  }
 
-  items: string[] = ['Item 1', 'Item 2', 'Item 3'];
+  fetchLocations() {
+    getDocs(this.locationCollectionRef)
+      .then((snapshot) => {
+        this.locations = snapshot.docs.map((doc) => doc.data());
+      })
+      .catch((error) => {
+        console.error('Error fetching locations:', error);
+      });
+  }
 
-  itemVariants: string[] = [
-    'Item Variant 1',
-    'Item Variant 2',
-    'Item Variant 3',
-  ];
-
-  itemVariantsOnLocation: string[] = [
-    'Item Variant 1 on Location 1',
-    'Item Variant 2 on Location 1',
-    'Item Variant 3 on Location 1',
-  ];
-
-  allItemVariantsOnLocation: string[] = [
-    'All Item Variants on Location 1',
-    'All Item Variants on Location 2',
-    'All Item Variants on Location 3',
-  ];
-
-  searchTerm!: string;
-  searchResult!: { variantName: string; quantity: number };
-
-  searchVariant() {}
-
-  ngOnInit(): void {}
+  fetchItems() {
+    getDocs(this.itemCollectionRef)
+      .then((snapshot) => {
+        this.items = snapshot.docs.map((doc) => doc.data());
+      })
+      .catch((error) => {
+        console.error('Error fetching items:', error);
+      });
+  }
 
   openModal() {
     this.isModalOpen = true;
@@ -51,12 +69,16 @@ export class FeedComponent implements OnInit {
 
   addItem() {
     console.log('button clicked');
-
     this.router.navigate(['/additem']);
   }
+
   addLocation() {
     console.log('button clicked');
-
     this.router.navigate(['/addlocation']);
+  }
+
+  addVariant() {
+    console.log('button clicked');
+    this.router.navigate(['/addvariant']);
   }
 }
