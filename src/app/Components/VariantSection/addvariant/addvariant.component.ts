@@ -162,15 +162,17 @@ export class AddvariantComponent implements OnInit {
         );
         console.log('id comparison query', locationsQuery);
       }
+
       if (locationsQuery) {
         let variantsQuery = query(this.locationcollectionRef);
         console.log('query', variantsQuery);
 
-        variantsQuery = query(
-          this.locationcollectionRef,
-          where('variantName', '==', variantsQuery)
-        );
-        console.log('variants query', this.locationcollectionRef);
+        getDocs(variantsQuery).then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            const variants = doc.data().variants;
+            console.log('variants:', variants);
+          });
+        });
       }
     }
   }
