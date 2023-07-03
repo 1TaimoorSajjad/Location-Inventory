@@ -8,6 +8,7 @@ import {
   DocumentReference,
   CollectionReference,
   updateDoc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
@@ -31,11 +32,6 @@ export class TransferComponent implements OnInit {
   ngOnInit(): void {
     this.getLocations();
     this.initializeForm();
-  }
-
-  onSubmit() {
-    const formData = this.registerForm.value;
-    console.log(formData);
   }
 
   getLocations() {
@@ -82,18 +78,56 @@ export class TransferComponent implements OnInit {
 
     if (selectedLocation) {
       this.variants = selectedLocation.variants;
+      console.log(this.variants);
       const variants = this.getVariants();
       variants.clear();
 
-      selectedLocation.variants.forEach((variant: any) => {
-        const variantGroup = this.formBuilder.group({
-          variant: [variant.variant, Validators.required],
-          quantity: [variant.quantity, Validators.required],
-          selected: [false],
-        });
-        variants.push(variantGroup);
+      selectedLocation.variants.forEach((variantItem: any) => {
+        console.log('variant', variantItem);
+
+        if (variantItem && typeof variantItem.variant === 'string') {
+          this.getVariantData(variantItem.variant)
+            .then((variantRes) => {
+              if (variantRes) {
+                console.log('variant', variantRes);
+                const variantGroup = this.formBuilder.group({
+                  variant: [variantRes.variant, Validators.required],
+                  variantName: [variantRes.variantName, Validators.required],
+                  quantity: [variantItem.quantity, Validators.required],
+                  selected: [false],
+                });
+                variants.push(variantGroup);
+              }
+            })
+            .catch((error) => {
+              console.error('Error fetching variant data: ', error);
+            });
+        }
+
+        // const variantGroup = this.formBuilder.group({
+        //   variant: [variant.variant, Validators.required],
+        //   quantity: [variant.quantity, Validators.required],
+        //   selected: [false],
+        // });
+        // variants.push(variantGroup);
       });
     }
+  }
+
+  getVariantData(variantId: string): Promise<any> {
+    const variantDocRef = doc(this.firestore, 'variants', variantId);
+    return getDoc(variantDocRef)
+      .then((variantDocSnapshot) => {
+        if (variantDocSnapshot.exists()) {
+          return variantDocSnapshot.data();
+        } else {
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching variant data: ', error);
+        return null;
+      });
   }
   transferVariant() {
     const formData = this.registerForm.value;
