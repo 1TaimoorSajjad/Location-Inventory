@@ -9,6 +9,7 @@ import {
   doc,
   updateDoc,
   where,
+  arrayUnion,
 } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -170,8 +171,29 @@ export class AddvariantComponent implements OnInit {
         getDocs(variantsQuery).then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             const variants = doc.data().variants;
+            const quantity = formData.quantity;
+
             console.log('variants:', variants);
           });
+
+          updateDoc(doc(this.locationcollectionRef, this.documentId), {
+            variants: arrayUnion({
+              variant: formData.variant,
+              quantity: formData.quantity,
+            }),
+          })
+            .then(() => {
+              console.log('Form data updated in Firestore');
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Variant Updated Successfully!',
+              });
+              this.router.navigate(['/variants']);
+            })
+            .catch((error: any) => {
+              console.log('Error updating form data in Firestore:', error);
+            });
         });
       }
     }
