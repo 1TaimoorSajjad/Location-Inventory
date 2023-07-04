@@ -42,7 +42,7 @@
             (change)="filterLocations()"
             formControlName="location"
           >
-            <option value="">Select a location</option>
+            <option value="" disabled selected hidden>Select a location</option>
             <option *ngFor="let location of locations" [value]="location.id">
               {{ location.locationName }}
             </option>
