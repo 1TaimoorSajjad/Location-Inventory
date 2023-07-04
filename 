@@ -1,0 +1,524 @@
+[33mcommit c5559f8154336b96e5f93cbeddd14faa52f62a2c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/updates[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mupdates[m[33m)[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 21:59:04 2023 +0500
+
+    Displayed the total entities in the dashboard
+
+[33mcommit ec1c2080294c13eaa15af3c9e67758f8e6dacadd[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 21:17:06 2023 +0500
+
+    Successfully done
+
+[33mcommit 2b2c1c52b4fb161ffa7e5c0e3ff4bb9c93761b3d[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 20:51:59 2023 +0500
+
+    Sending quantity into the locations
+
+[33mcommit 3ff5d6ef64b4284d61791e1ee5b2222dda0c3e04[m[33m ([m[1;31morigin/location_changes[m[33m)[m
+Author: Taimoor <115484729+Taimoors7@users.noreply.github.com>
+Date:   Mon Jul 3 20:26:20 2023 +0500
+
+    Update README.md
+
+[33mcommit e15899dea05b689a05a34bc917d9b674436f0bc3[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 20:24:56 2023 +0500
+
+    git push
+
+[33mcommit d146a398272eb2ecba0ed24472a3bc015690e8b5[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 20:02:11 2023 +0500
+
+    Adding the query for variants
+
+[33mcommit ac7ed4d6ad2b8e057f1713929869335dd7521d0b[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 18:42:55 2023 +0500
+
+    sending the location and quantity to the location from add variant
+
+[33mcommit f14a27215bcfcf0d3bef9b1019ebccd40ce7a5d5[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 18:16:34 2023 +0500
+
+    Variant Name added
+
+[33mcommit 0ff87edcb8fa1b184f54d27e750cec65116773ce[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 17:16:30 2023 +0500
+
+    Added route for the dashboard in the sidenav
+
+[33mcommit 042d140dd923867bc6ad6051b1b3cea589149c81[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 17:02:34 2023 +0500
+
+    Changed the view of locations
+
+[33mcommit 55d1c00665e1d24a151b7ace2194021533981e33[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 14:17:59 2023 +0500
+
+    new changes in the location view section to display data when the location is selected
+
+[33mcommit fc3855b8d21c9b83a3fb974aaea238c79d36a5de[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jul 3 13:06:35 2023 +0500
+
+    Sweet Alert Added
+
+[33mcommit 2483cd1b1d880383333c9dbf61cfb260a347d6f7[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 20:43:03 2023 +0500
+
+    [Fixing the variant name in transfer]
+
+[33mcommit 5da3574b6f9aed909522b8141061fa57dd3e3f2b[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 20:06:54 2023 +0500
+
+    [Branch setting]
+
+[33mcommit 24105b65baa8d7ba329aa2b70a95a3eb8e730f51[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 19:30:16 2023 +0500
+
+    [Update] increase the size of the budget to 5mb
+
+[33mcommit 09a0d6dca153b231702e5830360e4eb933d51c0d[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 17:54:11 2023 +0500
+
+    [Update] delete button funtional
+
+[33mcommit ff66285f647347a0dd2dfac2c75da795095b8671[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 17:36:54 2023 +0500
+
+    [Fix] added the path for SVGs
+
+[33mcommit 14d08781dd994b3e6b00a2a033f03f03d4daf6cc[m
+Author: Taimoor Sajjad <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 17:28:10 2023 +0500
+
+    [Update]Added the registered users table view and also added it in the sidenav
+
+[33mcommit 05a92b5b9d70c6366a17430facfc0aca4420940c[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 16:50:37 2023 +0500
+
+    [Update]Added the selector funtionality to only show the records of the selected location in the table
+
+[33mcommit 3109162d656cd36bb313f1218dabfe98f4a1b95a[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 16:45:27 2023 +0500
+
+    Location selector in the locations section
+
+[33mcommit 2e08fe539abdf3c144ab86a9661cb126f2a1c936[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 14:17:34 2023 +0500
+
+    Transfer Variants logic added
+
+[33mcommit 0d1b1b8ebd86b67a393b65c51a0ce361d436e85e[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 27 13:29:39 2023 +0500
+
+    Favicon changed
+
+[33mcommit a6b1125d162c09c00603d8c8e14a7463986fea8a[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 20:41:41 2023 +0500
+
+    new favicon added
+
+[33mcommit eec2da1d6baf158299c89581456d88eb05348fa3[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 20:03:49 2023 +0500
+
+    Added the locations selector in add variant s form
+
+[33mcommit 55921b694f5f7a2ae1743d209794b86e52f6a6b2[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 19:50:20 2023 +0500
+
+    [Fixed] fixed the location edit and variant edit
+
+[33mcommit 36cb75619ffb9ff2eb65525cdecb4b5c63150549[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 19:20:02 2023 +0500
+
+    Added edit funtionality for variants
+
+[33mcommit 5ed279067475f6dfe0c6442dbdde5ba91372dd2e[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 19:10:02 2023 +0500
+
+    [Error] location editing not working for now
+
+[33mcommit 60d273c16d0f20a4a5b917d7a3ed525eb378ffb7[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 18:48:42 2023 +0500
+
+    [Update] Adddedd funtionality for edit in item section
+
+[33mcommit 54b21bfc4e910cf3f695e5dfb3b9cc3e36e58777[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:55:09 2023 +0500
+
+    [Update] Added edit and delete buttons in item section
+
+[33mcommit fe6edba151066b818983bf1852a42b710674a694[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:49:32 2023 +0500
+
+    [Adding edit functionality for locations]
+
+[33mcommit ad3cfbc5a29d76c007d1f33f6980451e81e2cd1e[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:46:00 2023 +0500
+
+    [Update] name change for feed to dashboard and routes updated
+
+[33mcommit 7c5627b0628e1d68e7100f394c3ddaff3aa0bc66[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:41:00 2023 +0500
+
+    [Major Change] moved the code files in their respective sections
+
+[33mcommit 8377bbba8486c7526691fd47533b4eee97322f5f[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:22:44 2023 +0500
+
+    [Update]Removed Async and applied .then() methods in variant Section
+
+[33mcommit 5d96bc34f859e0ec55b0b960f2a4907283354014[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:19:53 2023 +0500
+
+    [Update]Removed Async and applied .then() methods in item section
+
+[33mcommit 18a13a8d0d7f5c6792ba3c73cfb817fb3bb35b88[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 17:17:23 2023 +0500
+
+    [Update]Removed Async and applied .then() methods
+
+[33mcommit 16d09753fca3ae90d170f8fedec46e889c71ceb3[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 16:53:49 2023 +0500
+
+    [Update] Added location and quantity in add variant form
+
+[33mcommit c45bf01e9caf3da33ee9b8ec98414a8b1ca1f5dd[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 26 14:59:02 2023 +0500
+
+    [Update] removed the dash from the item in variant form
+
+[33mcommit ea597cd27b47fd34586f7a2823a18dbd7f86b71b[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 19:37:36 2023 +0500
+
+    Add a selector in table
+
+[33mcommit 892321b5d2f5b1139bda0a28cefc09d6c7e85d11[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 17:51:02 2023 +0500
+
+    Quantity populating working on variant name
+
+[33mcommit e001aa7710d33429197056414352d744531cef07[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 17:20:35 2023 +0500
+
+    Adding table for variants and quantity
+
+[33mcommit d90ac9c2963ddba0d7197c3c2f0113ae65f8ea23[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 17:06:20 2023 +0500
+
+    Added selector for locations
+
+[33mcommit 020d8cd00e9ebb92d2acfbf5c5f4e3762fd98a24[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 16:17:15 2023 +0500
+
+    Adding the locations selector
+
+[33mcommit 554618aa72e9acfd3697b4396679b85f9226c22e[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 14:31:35 2023 +0500
+
+    UI improvements and transfer component added
+
+[33mcommit bcdf17ea6c9c8568d22ad12dc138046ff4c9cab2[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Fri Jun 23 13:03:41 2023 +0500
+
+    Added the edit and user button
+
+[33mcommit b9fc8ec368809956be34f06a649a9b6cc33a4f5d[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 19:45:33 2023 +0500
+
+    Fixed the variant name in location
+
+[33mcommit bc886fc89b6d0d7ebad037421a4ab4b8c30800c1[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 19:05:30 2023 +0500
+
+    fixing the variant id issue
+
+[33mcommit fb8b2c53d2a6b5b35deaa5568e002f21447651c1[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 17:19:45 2023 +0500
+
+    Added route for the edit
+
+[33mcommit ebf4e73ba4821d65039e7d99131751455a165dc6[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 16:55:25 2023 +0500
+
+    moved the variants in an array in locations
+
+[33mcommit 54221409685d96367d1a736c48d0eb7da27deca4[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 14:53:45 2023 +0500
+
+    Added form array import
+
+[33mcommit 177eda8a399015692457e6873dc143ee3fe31137[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 14:53:10 2023 +0500
+
+    Added form array
+
+[33mcommit 5e3e3daf76821b3b7ea420be96d034f8b2d3bd6b[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 13:41:52 2023 +0500
+
+    Added quantity in locations
+
+[33mcommit 3e84996260e3d6a6ee6f664731676acf21fd560f[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Thu Jun 22 12:35:55 2023 +0500
+
+    updated them itemname in the variant section
+
+[33mcommit ebb48534aa169942f026aa55463097dc37d62a43[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 22:56:07 2023 +0500
+
+    Fixed the location variant name error
+
+[33mcommit 6e1b8dae67ca93c171bc080dcd01f1cf79cf88ad[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 21:12:24 2023 +0500
+
+    Fixing the errors
+
+[33mcommit 8c848cf84df5fb3a689e2dc7b5433b1215e0bfb0[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 17:43:10 2023 +0500
+
+    Added the location to the items drop down
+
+[33mcommit e59b44167743afbb7e0519d3fd99975ff3ff3c14[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 16:52:44 2023 +0500
+
+    Added location id in the item section
+
+[33mcommit 5b4ba7b249f8544648a14472c31426f58effd5ee[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 16:00:33 2023 +0500
+
+    Logged in account name displayed in sidenav
+
+[33mcommit ccd88d6d87f442338001cb72f1bb9894336c6892[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 15:57:35 2023 +0500
+
+    Added the detailes for the logged in user
+
+[33mcommit 018a121c3890f67c2952d832387bcfde8f91dd06[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 15:20:06 2023 +0500
+
+    Route added for the registration and UI added
+
+[33mcommit 73240425c0f104d5cf73321dfae1aa5003c1c1a2[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 15:07:24 2023 +0500
+
+    Added Auth folder for login and registration
+
+[33mcommit 480a3930dd806e4919f9c01783deffcea818ce60[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 14:59:07 2023 +0500
+
+    Auth State Change implemented
+
+[33mcommit 20204a4ad432f8672c21a23f55f6a148bea659e0[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 14:41:06 2023 +0500
+
+    Locations added in the variants
+
+[33mcommit 55273aa4109dd363deb012fc0a664980c39f469d[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Wed Jun 21 13:49:39 2023 +0500
+
+    Adding multiple users
+
+[33mcommit 6f514c6b50163153cfdd43b96c0187b71860d52a[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 21:05:37 2023 +0500
+
+    Added logo
+
+[33mcommit d299fa9cea6f7408078c882f7a93173fa60d2d99[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 20:49:47 2023 +0500
+
+    Specified the items and added locations in the items section
+
+[33mcommit e7d82d5dd499b371eea68d7e79eaf3c2002d35d3[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 18:20:59 2023 +0500
+
+    Added route for empty URL
+
+[33mcommit c264e35ed22ab432ccc6d1d5c5705dc679177634[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 17:16:57 2023 +0500
+
+    Fixing the location items
+
+[33mcommit 2f79b779798792f835b7e93c29f6e76970239e17[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 15:08:35 2023 +0500
+
+    Sign Out fixed
+
+[33mcommit fcd6a284add2c837cfa8fb7c21311789c77a2e26[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 14:48:15 2023 +0500
+
+    Added signout in navbar
+
+[33mcommit df15e6fce0adad633ad8cc7ec36d9901de3897db[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 14:43:04 2023 +0500
+
+    Update the logo in sidenav
+
+[33mcommit 733802b330cd6e73e0a2ea6c7b77db8ea3c81781[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 14:16:56 2023 +0500
+
+    Form improvements
+
+[33mcommit 740bd56bc31cd7f23971bcc6116762f769dafa6f[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 13:57:59 2023 +0500
+
+    items displaying variants name
+
+[33mcommit c23582e03409084ad4f677e472fa135ad922bda2[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 13:53:38 2023 +0500
+
+    variants table populated with the data
+
+[33mcommit e436bd984e9f408a79bf51624e6caebc0aa661f0[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 13:17:56 2023 +0500
+
+    Items table populated with data from the database
+
+[33mcommit 1fc171a12f909c43af0b7e50c38bc8faddb19925[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 12:33:20 2023 +0500
+
+    Locations Table populated with data from the database
+
+[33mcommit a2fe9abf2e0b873983252ee1fe93aa6c92600ee4[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 12:14:54 2023 +0500
+
+    Add location form added
+
+[33mcommit 42c953a24e20b5cfcf2aa13a162cb505dd1fc9d9[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Tue Jun 20 00:44:22 2023 +0500
+
+    Form design to add location
+
+[33mcommit ea2cc27315e3f51ab63674c90d98c19f99ffc9a7[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 23:19:39 2023 +0500
+
+    Changed sidenav SVGs
+
+[33mcommit cbe4c7d0eea0da836f2541efe409720b92089cba[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 22:52:40 2023 +0500
+
+    Added variants table
+
+[33mcommit f33046ac68deb4a56375bfe918af648e496347ac[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 22:44:08 2023 +0500
+
+    Added the tables for the different views
+
+[33mcommit c888eb0586c58270d8942c8591644dd8557f6736[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 22:01:23 2023 +0500
+
+    Added sidenav
+
+[33mcommit fcbc14636e5e621775727786d8d0575d4160ab64[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 21:55:52 2023 +0500
+
+    Add Item and Add location button added
+
+[33mcommit 536613045e06a4184c72e1d567e1d68934eb6452[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 21:47:53 2023 +0500
+
+    Added additem button
+
+[33mcommit 7c53f6b629c34ba0ff85d1c092804aef97101cf1[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 21:34:08 2023 +0500
+
+    Changing the task to have a menu
+
+[33mcommit d075b17f0b8592e10096ca3948b21ecdfbdefaa6[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 15:30:59 2023 +0500
+
+    Feed UI created
+
+[33mcommit 28b649c3fa351bca2911b5f129c322864830f2dd[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 14:15:33 2023 +0500
+
+    login functionality added
+
+[33mcommit 2973f0addfcb949e5d943f04143b765459424fc8[m
+Author: Taimoors7 <taimoorsajjad980@gmail.com>
+Date:   Mon Jun 19 13:49:11 2023 +0500
+
+    Firebase firestore attached
+
+[33mcommit 6b2ce87cdcc8bb53236aed2eaaccbc165f66a919[m
+Auth
